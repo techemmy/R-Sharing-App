@@ -35,7 +35,7 @@ const SortBySchool = () => {
           }}
           className="border border-red-500 rounded-sm"
         >
-          kkxlkxklxLKAKXMakl
+          Search
         </button>
       </div>
       {/* dropdown onType */}

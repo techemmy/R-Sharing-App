@@ -26,10 +26,7 @@ const Signin = () => {
               placeholder="***************"
               className=""
             />
-
-            <button className="bg-black self-center w-max px-5 py-1 text-white">
-              Log In
-            </button>
+            <Button />
           </form>
         </div>
         <div className="h-35 w-40 p-1">

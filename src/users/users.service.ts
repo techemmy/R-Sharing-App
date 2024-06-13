@@ -35,7 +35,16 @@ export class UsersService {
     return this.userModel.findOne({ email });
   }
 
-  updateUser(id: string, updateUserDto: UpdateUserDto) {
+  async updateUser(id: string, updateUserDto: UpdateUserDto) {
+    const { username, email } = updateUserDto;
+    const usernameExists = await this.getUserByUsername(username);
+    const emailExists = await this.getUserByEmail(email);
+    if (usernameExists) {
+      throw new BadRequestException('Username has been taken.');
+    }
+    if (emailExists) {
+      throw new BadRequestException('Email has already been used.');
+    }
     return this.userModel.findByIdAndUpdate(id, updateUserDto);
   }
 

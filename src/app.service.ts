@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { config } from 'process';
 
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Welcome To PipeOps!';
+    return 'Hello World';
   }
 }

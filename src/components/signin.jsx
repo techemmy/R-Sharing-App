@@ -1,5 +1,6 @@
 import images from "../assets/assets";
 import InputComponent from "./inputField";
+
 const Signin = () => {
   return (
     <div className="grid place-items-center h-screen">
@@ -14,6 +15,15 @@ const Signin = () => {
               label="Email"
               type="text"
               placeholder="abshikah jemmel"
+              className=""
+            />
+
+            <InputComponent
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="***************"
               className=""
             />
           </form>

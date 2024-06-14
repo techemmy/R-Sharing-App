@@ -3,6 +3,10 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+// TODO: add status codes to controllers
+// TODO: add return types to services
+// TODO: move throwing errors to the controllers
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('/api');

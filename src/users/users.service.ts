@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema';
 import { BadRequestException } from '@nestjs/common';
 
+// TODO: move error handling to the controllers
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
@@ -21,6 +22,10 @@ export class UsersService {
       throw new BadRequestException('Email has already been used.');
     }
     return this.userModel.create(createUserDto);
+  }
+
+  getUsers() {
+    return this.userModel.find({}).select('-password');
   }
 
   getUserById(id: string) {
@@ -45,10 +50,12 @@ export class UsersService {
     if (emailExists) {
       throw new BadRequestException('Email has already been used.');
     }
-    return this.userModel.findByIdAndUpdate(id, updateUserDto);
+    return this.userModel
+      .findByIdAndUpdate(id, updateUserDto, { new: true })
+      .select('-password');
   }
 
   removeUser(id: string) {
-    return `This action removes a #${id} auth`;
+    return this.userModel.findByIdAndDelete(id);
   }
 }

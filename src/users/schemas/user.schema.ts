@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
-import * as bcrypt from "bcrypt";
+import mongoose, { HydratedDocument } from 'mongoose';
+import * as bcrypt from 'bcrypt';
+import { School } from 'src/school/schemas/school.schema';
 
 @Schema()
 export class User {

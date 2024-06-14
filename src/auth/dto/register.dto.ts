@@ -1,4 +1,5 @@
 import { Transform } from 'class-transformer';
+import { IsObjectId } from 'nestjs-object-id';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class RegisterDto {
@@ -13,6 +14,7 @@ export class RegisterDto {
   email: string;
 
   @IsString()
+  @IsObjectId()
   school: string;
 
   @IsNotEmpty()

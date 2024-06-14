@@ -1,5 +1,6 @@
 import images from "../assets/assets";
 import InputComponent from "./inputField";
+import Button from "./button";
 
 const Signin = () => {
   return (
@@ -26,7 +27,10 @@ const Signin = () => {
               placeholder="***************"
               className=""
             />
-            <Button />
+            <Button
+              label={`Log In`}
+              className={`bg-black self-center w-max px-5 py-1 text-white`}
+            />
           </form>
         </div>
         <div className="h-35 w-40 p-1">

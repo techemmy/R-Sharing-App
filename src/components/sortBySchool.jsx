@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import schools from "../apiResources/schoolList";
+import { Document } from "postcss";
 
 const SortBySchool = () => {
   const [value, setValue] = useState("");
@@ -16,54 +17,58 @@ const SortBySchool = () => {
     setValue(selected);
   };
 
+  const handleClickOutside = (event) => {
+    // Check if the click is outside the autosuggest component
+    if (!event.target.closest(".dropdown")) {
+      // console.log("other parts of the page clicked");
+      setValue("");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
-    <div>
+    <>
       {/* search input and search button */}
-      <div className="w-10 flex">
+      <div className="right-0 shrink  basis-full h-3.6 z-[10000]  flex flex-col">
         <input
-          className="w-10 h-5 border
-           border-red-300"
+          className="w-full h-full border p-1
+           border-gray-500"
           type="text"
           onChange={handleChange}
-          placeholder="Search"
+          placeholder="SortBySchool"
           value={value}
         />
+        <ul className="dropdown">
+          {schools
+            .filter((item) => {
+              const searchItem = value.toLowerCase();
+              const schoolName = item.school.toLowerCase();
+              return (
+                searchItem &&
+                schoolName.startsWith(searchItem) &&
+                schoolName !== searchItem
+              );
+            })
 
-        <button
-          onClick={() => {
-            handleSearch(value);
-          }}
-          className="border border-red-500 rounded-sm"
-        >
-          Search
-        </button>
+            .map((item) => (
+              <li
+                key={item.school}
+                className="cursor-pointer bg-white mt-0.5 p-1 border rounded-sm w-25"
+                onClick={() => {
+                  handlePersist(item.school);
+                }}
+              >
+                {item.school}
+              </li>
+            ))}
+        </ul>
       </div>
       {/* dropdown onType */}
-      <ul>
-        {schools
-          .filter((item) => {
-            const searchItem = value.toLowerCase();
-            const schoolName = item.school.toLowerCase();
-            return (
-              searchItem &&
-              schoolName.startsWith(searchItem) &&
-              schoolName !== searchItem
-            );
-          })
-
-          .map((item) => (
-            <div
-              key={item.school}
-              className="cursor-pointer mt-0.5 p-1 border rounded-sm w-25"
-              onClick={() => {
-                handlePersist(item.school);
-              }}
-            >
-              {item.school}
-            </div>
-          ))}
-      </ul>
-    </div>
+    </>
   );
 };
 

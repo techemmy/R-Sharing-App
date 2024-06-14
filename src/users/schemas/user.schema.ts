@@ -10,8 +10,12 @@ export class User {
   @Prop({ required: true, unique: true })
   email: string;
 
-  @Prop({ required: true })
-  school: string;
+  @Prop({
+    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: School.name,
+  })
+  school: School;
 
   @Prop({ required: true })
   password: string;

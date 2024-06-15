@@ -1,11 +1,10 @@
 import { Transform } from 'class-transformer';
-import { IsObjectId } from 'nestjs-object-id';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsMongoId, IsNotEmpty, IsString } from 'class-validator';
 
 export class RegisterDto {
   @IsString()
   @IsNotEmpty()
-  @Transform(({ value }) => value.toLowerCase())
+  @Transform(({ value }) => value.toLowerCase().replaceAll(' ', '_'))
   username: string;
 
   @IsEmail()
@@ -14,7 +13,7 @@ export class RegisterDto {
   email: string;
 
   @IsString()
-  @IsObjectId()
+  @IsMongoId()
   school: string;
 
   @IsNotEmpty()

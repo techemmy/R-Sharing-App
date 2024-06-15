@@ -39,7 +39,7 @@ export class AuthService {
       throw new BadRequestException('Invalid password');
     }
 
-    const { password: _, ...payload } = user;
+    const { password: _, ...payload } = user.toJSON();
     return { access_token: await this.jwtService.signAsync(payload) };
   }
 

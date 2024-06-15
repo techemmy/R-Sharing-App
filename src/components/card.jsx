@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ label, image, id }) => {
+  const navigate = useNavigate();
+
   const handleNavigate = () => {
-    navigate("/about");
+    navigate("/resource-details");
   };
 
   return (

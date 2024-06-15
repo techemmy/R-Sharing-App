@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
 const Card = ({ label, image, id }) => {
-  const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/resource-details");
+    navigate("/about");
   };
 
   return (
     <>
-      <div className="shadow-3xl flex items-center border-0.3 border-gray-400 rounded-3xl gap-2  w-80">
+      <div className="shadow-3xl flex items-center border-0.3 border-gray-400 rounded-3xl gap-2 ">
         <img src={image} alt="" className="w-20" />
         <div className="flex flex-col gap-2">
           <p>

@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 const Card = ({ label, image, id }) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/resource-details");
+  };
+
   return (
     <>
       <div className="shadow-3xl flex items-center border-0.3 border-gray-400 rounded-3xl gap-2  w-80">
@@ -9,7 +16,10 @@ const Card = ({ label, image, id }) => {
           </p>
           <h1 className="">{label}</h1>
           <div className="flex gap-1">
-            <button className="bg-black  w-max px-5 py-1 text-white">
+            <button
+              onClick={handleNavigate}
+              className="bg-black  w-max px-5 py-1 text-white"
+            >
               View Resource
             </button>
             <button className="bg-black  w-max px-2 py-1 text-white">

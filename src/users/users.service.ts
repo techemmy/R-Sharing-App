@@ -28,7 +28,7 @@ export class UsersService {
     return this.userModel.find({}).select('-password');
   }
 
-  getUserById(id: string) {
+  findById(id: string) {
     return this.userModel.findById(id);
   }
 

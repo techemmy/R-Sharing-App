@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Body,
+  Req,
   Controller,
   Delete,
   Get,
@@ -28,9 +29,7 @@ export class UsersController {
 
   @Get(':id')
   async getUser(@Param('id', IsMongooseIdPipe) userId: string) {
-    const user = await this.usersService
-      .getUserById(userId)
-      .select('-password');
+    const user = await this.usersService.findById(userId).select('-password');
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -64,7 +63,7 @@ export class UsersController {
     @Param('userId') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    const user = await this.usersService.getUserById(id).select('-password');
+    const user = await this.usersService.findById(id).select('-password');
     if (!user) {
       throw new BadRequestException('User does not exist');
     }
@@ -79,7 +78,7 @@ export class UsersController {
   @HttpCode(204)
   @Delete(':userId')
   async deleteUser(@Param('userId') id: string) {
-    const user = await this.usersService.getUserById(id).select('-password');
+    const user = await this.usersService.findById(id).select('-password');
     if (!user) {
       throw new NotFoundException('User not found');
     }

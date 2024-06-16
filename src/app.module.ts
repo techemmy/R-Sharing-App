@@ -6,6 +6,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { SchoolModule } from './school/school.module';
 import { UsersModule } from './users/users.module';
+import { ResourcesModule } from './resources/resources.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import config from './config';
 
 @Module({
@@ -15,6 +17,8 @@ import config from './config';
     AuthModule,
     SchoolModule,
     UsersModule,
+    ResourcesModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

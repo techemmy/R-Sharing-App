@@ -9,7 +9,7 @@ const Sidebar = ({ layout }) => {
     { id: 1, title: "ALL RESOURCES", path: "/feed" },
     { id: 2, title: "PAST QUESTIONS", path: "/blah" },
     { id: 3, title: "PDFS", path: "/pdfs" },
-    { id: 3, title: "NOTES", path: "/handwritten-notes" },
+    { id: 4, title: "NOTES", path: "/handwritten-notes" },
     { id: 5, title: "Setting", path: "/settings" },
   ];
 
@@ -42,9 +42,9 @@ const Sidebar = ({ layout }) => {
             className="w-full mb-1 sidebar-input bg-black border border-gray-300 p-1 rounded-sm"
           />
         </li>
-        {menus.map((menu, index) => (
+        {menus.map((menu) => (
           <NavLink
-            key={index}
+            key={menu.id}
             to={menu.path}
             className={({ isActive }) =>
               `flex rounded-md py-1.5 cursor-pointer text-sm items-center gap-1 ${

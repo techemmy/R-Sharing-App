@@ -1,5 +1,6 @@
 import images from "../assets/assets";
 import jsonData from "../apiResources/dummy-1.json";
+// import { useNavigate } from "react-router-dom";
 
 const ViewResourceMain = () => {
   const resourceInfo = [
@@ -11,6 +12,16 @@ const ViewResourceMain = () => {
     { id: 6, info: "Redeemer's University", icon: images.User },
   ];
 
+  // const navigate = useNavigate();
+
+  // const handleNavigate = (id) => {
+  //   if (id === 1) {
+  //     console.log("id === 1");
+  //     navigate("/profile-page"); // Specify the route you want to navigate to
+  //   }
+  //   return;
+  // };
+
   return (
     // <div className="flex flex-col items-center">
     <div>
@@ -21,7 +32,14 @@ const ViewResourceMain = () => {
             <div className=" border-0.1  rounded-2xl p-1">
               <img src={info.icon} alt="" />
             </div>
-            <p className="text-left">{info.info}</p>
+            <p
+              // onClick={() => {
+              //   handleNavigate(info.id);
+              // }}
+              className="cursor-pointer"
+            >
+              {info.info}
+            </p>
           </div>
         );
       })}

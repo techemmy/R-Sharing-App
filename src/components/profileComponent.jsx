@@ -1,14 +1,13 @@
 import images from "../assets/assets";
 
 const ProfilePage = () => {
-  // const details = [
+  const details = [
+    { id: 1, param: "Name", actual: "Oloyede Emmanuel" },
+    { id: 2, param: "Username", actual: "Techemmmy" },
+    { id: 3, param: "School", actual: "Redeemers" },
+    { id: 4, param: "Email", actual: "mrBeast@gmail.com" },
+  ];
 
-  //   {id: , info:,actual: }
-  //   {id: , info:,actual: }
-  //   {id: , info:,actual: }
-  //   {id: , info:,actual: }
-  //   {id: , info:,actual: }
-  // ]
   return (
     <div className="pl-35 flex gap-7 pt-4 border-gray-300 border-3">
       <div className="w-10 basis-auto aspect-square rounded-full">
@@ -19,31 +18,17 @@ const ProfilePage = () => {
         />
       </div>
 
-      <div className="grid grid-cols-2 w-50  gap-3 grid-rows-3">
-        <div>
-          <p className="">Your Name</p>
-          <div className="border-b-0.1 border-gray-300 mt-0.5 text-gray-400 py-0.4  pl-0.1">
-            Harper Kim
-          </div>
-        </div>
-        <div>
-          <p className="">Your Name</p>
-          <div className="border-b-0.1 border-gray-300 mt-0.5 text-gray-400 py-0.4  pl-0.1">
-            Harper Kim
-          </div>
-        </div>
-        <div>
-          <p className="">Your Name</p>
-          <div className="border-b-0.1 border-gray-300 mt-0.5 text-gray-400 py-0.4  pl-0.1">
-            Harper Kim
-          </div>
-        </div>
-        <div>
-          <p className="">Your Name</p>
-          <div className="border-b-0.1 border-gray-300 mt-0.5 text-gray-400 py-0.4  pl-0.1">
-            Harper Kim
-          </div>
-        </div>
+      <div className="grid grid-cols-2 w-50  gap-3 grid-rows-2">
+        {details.map((detail) => {
+          return (
+            <div>
+              <p className="">{detail.param}</p>
+              <div className="border-b-0.1 border-gray-300 mt-0.5 text-gray-400 py-0.4  pl-0.1">
+                {detail.actual}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
     // <div className="pl-35">

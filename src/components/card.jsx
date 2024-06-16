@@ -4,7 +4,7 @@ const Card = ({ label, image, id }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/resource-details");
+    navigate("/resource-details/note-summary");
   };
 
   return (

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import images from "../assets/assets";
-import { NavLink } from "react-router-dom";
 
 const LeaderBoard = ({ layout }) => {
   const leaderBoard = [

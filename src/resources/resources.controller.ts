@@ -58,10 +58,12 @@ export class ResourcesController {
   async findAll(
     @PaginationParams() paginationParams: Pagination,
     @Query('q') q: string,
+    @Query('type') resourceType: ResourceType,
   ) {
     const resources = await this.resourcesService.findAll({
       paginationParams,
       q,
+      resourceType,
     });
     const total = await this.resourcesService.countAll();
     const { page, size } = paginationParams;

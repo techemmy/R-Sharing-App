@@ -26,12 +26,21 @@ export class ResourcesService {
   }
 
   findAll({
+    resourceType,
     paginationParams,
     q,
   }: {
-    paginationParams: Pagination;
-    q: string;
+    resourceType?: ResourceType;
+    paginationParams?: Pagination;
+    q?: string;
   }) {
+    const validResourceTypes = Object.values(ResourceType);
+    if (resourceType && !validResourceTypes.includes(resourceType)) {
+      throw new BadRequestException(
+        `Invalid resource type. Use ${validResourceTypes.join(' or ')}`,
+      );
+    }
+
     const { limit, offset } = paginationParams;
     if (q) {
       return this.resourceModel
@@ -41,10 +50,15 @@ export class ResourcesService {
             { courseCode: { $regex: q, $options: 'i' } },
           ],
         })
+        .where({ resourceType })
         .limit(limit)
         .skip(offset);
     }
-    return this.resourceModel.find({}).limit(limit).skip(offset);
+    return this.resourceModel
+      .find({})
+      .where({ resourceType })
+      .limit(limit)
+      .skip(offset);
   }
 
   countAll() {

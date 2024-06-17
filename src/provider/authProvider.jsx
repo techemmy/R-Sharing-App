@@ -8,7 +8,6 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [token, setToken_] = useState(() => {
     const cookie = document.cookie.split(";").filter(key => key.startsWith("token"))
-    console.log("cookie", cookie[0])
     return cookie[0]?.split("=")[1]
   });
   const { decodedToken: user, isExpired, reEvaluateToken } = useJwt(token);
@@ -33,7 +32,6 @@ const AuthProvider = ({ children }) => {
       api.defaults.headers.common["Authorization"] = "Bearer " + token;
       document.cookie = `token=${token}`
     } else {
-      console.log('else', Boolean(!isExpired && token))
       delete api.defaults.headers.common["Authorization"];
       document.cookie = `token=`;
     }

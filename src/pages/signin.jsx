@@ -7,7 +7,7 @@ import api from "../api";
 import { useNavigate } from "react-router-dom";
 
 const Signin = () => {
-  const { setToken } = useAuth();
+  const { logIn } = useAuth();
   const emailOrUsernameRef = React.useRef();
   const passwordRef = React.useRef();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Signin = () => {
       if (resp.status === 200) {
         alert('Login successful!')
       }
-      setToken(resp.data.access_token)
+      logIn(resp.data.access_token)
       navigate('/home')
     } catch (error) {
       const { response: { data } } = error;
@@ -35,7 +35,6 @@ const Signin = () => {
       console.log("Error Message:", data.message)
       console.log("Error Status:", data.statusCode)
     }
-    // setToken("hello there")
   }
   return (
     <div className="grid place-items-center h-screen">

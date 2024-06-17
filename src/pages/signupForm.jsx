@@ -1,34 +1,39 @@
 import React from "react";
-// import axios from "axios";
 import InputComponent from "../components/inputField";
-import Button from "../components/button";
 import images from "../assets/assets";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import api from "../api"
 
 const Registration = () => {
   const usernameInput = React.useRef();
   const emailInput = React.useRef();
   const passwordInput = React.useRef();
   const navigate = useNavigate();
-  // const [formData, setFormData] = useState({
-  //   fullName: "",
-  //   email: "",
-  //   password: "",
-  // });
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-  // };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const username = usernameInput.current.value;
-    const email = emailInput.current.value;
-    const password = passwordInput.current.value;
+    const username = usernameInput.current.value.trim();
+    const email = emailInput.current.value.trim();
+    const password = passwordInput.current.value.trim();
 
-    console.log(username, email, password);
-    // navigate("/home");
+    if (!username || !email || !password) {
+      return alert("Make sure all fields are filled")
+    }
+
+    try {
+      const resp = await api.post('/auth/register', { username, email, password });
+      if (resp.status === 201) {
+        alert('Signup successful!')
+        navigate('/login')
+      }
+    } catch (error) {
+      const { response: { data } } = error;
+      alert(data.message)
+      console.log("Error Type:", data.error)
+      console.log("Error Message:", data.message)
+      console.log("Error Status:", data.statusCode)
+    }
+
   };
 
   return (

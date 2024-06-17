@@ -59,7 +59,10 @@ export class ResourcesController {
     @PaginationParams() paginationParams: Pagination,
     @Query('q') q: string,
   ) {
-    const resources = await this.resourcesService.findAll(paginationParams, q);
+    const resources = await this.resourcesService.findAll({
+      paginationParams,
+      q,
+    });
     const total = await this.resourcesService.countAll();
     const { page, size } = paginationParams;
     const pages = Math.ceil(total / size);

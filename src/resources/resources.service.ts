@@ -25,7 +25,14 @@ export class ResourcesService {
     return this.resourceModel.create(createResourceDto);
   }
 
-  findAll({ limit, offset }: Pagination, q: string) {
+  findAll({
+    paginationParams,
+    q,
+  }: {
+    paginationParams: Pagination;
+    q: string;
+  }) {
+    const { limit, offset } = paginationParams;
     if (q) {
       return this.resourceModel
         .find({

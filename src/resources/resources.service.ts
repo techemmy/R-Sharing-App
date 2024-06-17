@@ -30,8 +30,8 @@ export class ResourcesService {
       return this.resourceModel
         .find({
           $or: [
-            { courseName: { $regex: '.*' + q + '.*', $options: 'i' } },
-            { courseCode: { $regex: '.*' + q + '.*', $options: 'i' } },
+            { courseName: { $regex: q, $options: 'i' } },
+            { courseCode: { $regex: q, $options: 'i' } },
           ],
         })
         .limit(limit)

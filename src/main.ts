@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 // TODO: add status codes to controllers
 // TODO: add return types to services
@@ -20,6 +21,7 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

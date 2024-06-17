@@ -12,7 +12,6 @@ export class User {
   email: string;
 
   @Prop({
-    required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: School.name,
     default: null

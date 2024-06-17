@@ -1,5 +1,11 @@
 import { Transform } from 'class-transformer';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsMongoId,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -13,7 +19,9 @@ export class CreateUserDto {
   email: string;
 
   @IsString()
-  school: string;
+  @IsMongoId()
+  @IsOptional()
+  school?: string;
 
   @IsNotEmpty()
   password: string;

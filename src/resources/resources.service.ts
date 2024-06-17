@@ -56,7 +56,7 @@ export class ResourcesService {
     resource: ResourcesDocument;
     pageNo: number;
   }) {
-    const folder = `${this.IMAGES_FOLDER}/${resource.resource_type}`;
+    const folder = `${this.IMAGES_FOLDER}/${resource.resourceType}`;
     return await this.cloudinaryService
       .uploadImage({ file, folder, public_id: `${resource.id}-${pageNo}` })
       .catch((e) => {
@@ -73,7 +73,7 @@ export class ResourcesService {
   }) {
     const deleted = await this.cloudinaryService.deleteImage({
       folder: this.IMAGES_FOLDER,
-      public_id: `${resource.resource_type}/${resource.id}-${pageNo}`,
+      public_id: `${resource.resourceType}/${resource.id}-${pageNo}`,
     });
 
     if (deleted.result === 'not found') {
@@ -86,7 +86,7 @@ export class ResourcesService {
     for (const image of resource.images) {
       await this.cloudinaryService.deleteImage({
         folder: this.IMAGES_FOLDER,
-        public_id: `${resource.resource_type}/${resource.id}-${image.pageNo}`,
+        public_id: `${resource.resourceType}/${resource.id}-${image.pageNo}`,
       });
     }
     return;

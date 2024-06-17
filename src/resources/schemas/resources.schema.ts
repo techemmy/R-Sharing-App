@@ -12,16 +12,16 @@ export interface Image {
 @Schema()
 export class Resources {
   @Prop({ required: true, enum: ResourceType })
-  resource_type: string;
+  resourceType: string;
 
   @Prop()
-  resource_year: number;
+  resourceYear: number;
 
   @Prop({ required: true })
-  course_name: string;
+  courseName: string;
 
   @Prop()
-  course_code: string;
+  courseCode: string;
 
   @Prop({ default: 0 })
   stars: number;

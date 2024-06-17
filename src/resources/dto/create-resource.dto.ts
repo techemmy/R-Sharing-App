@@ -12,17 +12,17 @@ export class CreateResourceDto {
   @IsString()
   @IsNotEmpty()
   @IsEnum(ResourceType)
-  resource_type: string;
+  resourceType: string;
 
   @IsInt()
-  resource_year: number;
+  resourceYear: number;
 
   @IsString()
   @IsNotEmpty()
-  course_name: string;
+  courseName: string;
 
   @IsString()
-  course_code: string;
+  courseCode: string;
 
   @IsMongoId()
   @IsNotEmpty()

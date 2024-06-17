@@ -12,19 +12,15 @@ const AuthProvider = ({ children }) => {
   });
   const { decodedToken: user, isExpired, reEvaluateToken } = useJwt(token);
 
-  const setToken = (newToken) => {
-    reEvaluateToken(newToken);
-    setToken_(newToken);
-  };
-
   const logOut = () => {
-    setToken(null)
-    return <Navigate to="/" />;
+    setToken_(null);
+    return <Navigate to="/" replace={true} />;
   };
 
   const logIn = (token) => {
-    setToken(token);
-    return <Navigate to="/home" />;
+    reEvaluateToken(token);
+    setToken_(token);
+    return <Navigate to="/" />
   }
 
   useEffect(() => {

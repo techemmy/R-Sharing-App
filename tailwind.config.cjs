@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
 
 function generateSpacingScale(max, step) {
   const scale = {};
@@ -13,30 +14,48 @@ module.exports = {
   theme: {
     extend: {
       spacing: generateSpacingScale(100, 0.1),
-      border: generateSpacingScale(50, 0.1),
+      borderWidth: generateSpacingScale(50, 0.1),
       colors: {
-        primary: {
-          marineBlue: "hsl(213, 96%, 18%)",
-          purplishBlue: "hsl(243, 100%, 62%)",
-          pastelBlue: "hsl(228, 100%, 84%)",
-          lightBlue: "hsl(206, 94%, 87%)",
-          strawberryRed: "hsl(354, 84%, 57%)",
-        },
-        neutral: {
-          coolGray: "hsl(231, 11%, 63%)",
-          lightGray: "hsl(229, 24%, 87%)",
-          magnolia: "hsl(217, 100%, 97%)",
-          alabaster: "hsl(231, 100%, 99%)",
-        },
+        "dark-purple": "#081A51",
+        "light-white": "rgba(255,255,255,0.17)",
+      },
+
+      fontSize: {
+        sm: "1rem",
+        md: "2rem",
+        lg: "3rem",
+      },
+
+      boxShadow: {
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
+        "2xl": "8px 6px 66px 0px rgba(0,0,0,0.26)",
       },
       screens: {
         sm: "768px",
       },
-      backgroundImage: (theme) => ({
-        desktop: "url('./assets/bg-sidebar-desktop.svg')",
-        mobile: "url('./assets/bg-sidebar-mobile.svg')",
-      }),
+      backgroundImage: (theme) => ({}),
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase }) {
+      addBase({
+        h1: { fontSize: "4.3rem" },
+        h2: { fontSize: "2rem" },
+        h3: { fontSize: "1rem" },
+      });
+    }),
+
+    plugin(function ({ addUtilities, theme }) {
+      const spacingUtilities = generateSpacingScale(100, 0.1);
+      const borderWidthUtilities = generateSpacingScale(50, 0.1);
+
+      addUtilities(
+        {
+          ".space-x": spacingUtilities, // Add spacing utilities
+          ".border-width": borderWidthUtilities, // Add border width utilities
+        },
+        ["responsive", "hover"]
+      ); // Optional variants for responsiveness and hover states
+    }),
+  ],
 };

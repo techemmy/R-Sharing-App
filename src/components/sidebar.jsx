@@ -1,11 +1,12 @@
 import images from "../assets/assets";
 import { NavLink } from "react-router-dom";
+import { RESOURCE_TYPE } from '../testPagesjsx/homepage'
 
 const Sidebar = ({ layout, handleChangeResourceType }) => {
   const menus = [
-    { id: 1, title: "ALL RESOURCES", path: "/feed", action: 'all' },
-    { id: 9, title: "NOTES", path: "/blah", action: 'notes' },
-    { id: 2, title: "PAST QUESTIONS", path: "/blah", action: 'pq' },
+    { id: 1, title: "ALL RESOURCES", path: "/feed", action: RESOURCE_TYPE.All },
+    { id: 9, title: "NOTES", path: "/blah", action: RESOURCE_TYPE.Note },
+    { id: 2, title: "PAST QUESTIONS", path: "/blah", action: RESOURCE_TYPE.PastQuestion },
     { id: 3, title: "PDFS", path: "/pdfs" },
     { id: 4, title: "NOTES", path: "/handwritten-notes" },
     { id: 5, title: "Setting", path: "/settings" },

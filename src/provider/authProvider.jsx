@@ -60,6 +60,7 @@ export const ProtectedRoute = () => {
     return <Navigate to="/login" />;
   }
 
+  api.defaults.headers.common["Authorization"] = "Bearer " + token;
   return <Outlet />;
 };
 

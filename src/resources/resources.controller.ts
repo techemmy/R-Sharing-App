@@ -13,6 +13,8 @@ import {
   HttpCode,
   ParseIntPipe,
   Query,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
 import { ResourcesService } from './resources.service';
 import { CreateResourceDto } from './dto/create-resource.dto';
@@ -27,7 +29,10 @@ import {
   PaginationParams,
 } from 'src/decorators/pagination.decorator';
 import { ResourceType } from './enums/resources.enums';
+import { AuthGuard } from 'src/auth/guard';
+import { Request } from 'express';
 
+@UseGuards(AuthGuard)
 @Controller({ version: '1', path: 'resources' })
 export class ResourcesController {
   constructor(
@@ -111,13 +116,20 @@ export class ResourcesController {
   @Patch('/star/:resourceId')
   async starAResource(
     @Param('resourceId', IsMongooseIdPipe) resourceId: string,
+    @Req() req: Request,
   ) {
     const resource = await this.resourcesService.findOne(resourceId);
     if (resource == null) {
       throw new BadRequestException('Resource does not exist');
     }
 
-    resource.stars++;
+    const { _id: userId } = req['user'];
+    if (resource.stars.includes(userId)) {
+      const userIdIdx = resource.stars.indexOf(userId);
+      resource.stars.splice(userIdIdx, 1);
+    } else {
+      resource.stars.push(userId);
+    }
     await resource.save();
     return { data: resource, message: 'Resource starred!' };
   }

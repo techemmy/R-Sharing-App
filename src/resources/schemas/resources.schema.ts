@@ -23,8 +23,8 @@ export class Resources {
   @Prop()
   courseCode: string;
 
-  @Prop({ default: 0 })
-  stars: number;
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: User.name }])
+  stars: Array<User>;
 
   @Prop({
     required: true,

@@ -25,7 +25,18 @@ export class ResourcesService {
     return this.resourceModel.create(createResourceDto);
   }
 
-  findAll({ limit, offset }: Pagination) {
+  findAll({ limit, offset }: Pagination, q: string) {
+    if (q) {
+      return this.resourceModel
+        .find({
+          $or: [
+            { courseName: { $regex: '.*' + q + '.*', $options: 'i' } },
+            { courseCode: { $regex: '.*' + q + '.*', $options: 'i' } },
+          ],
+        })
+        .limit(limit)
+        .skip(offset);
+    }
     return this.resourceModel.find({}).limit(limit).skip(offset);
   }
 

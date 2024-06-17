@@ -12,6 +12,7 @@ import {
   UploadedFiles,
   HttpCode,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ResourcesService } from './resources.service';
 import { CreateResourceDto } from './dto/create-resource.dto';
@@ -51,6 +52,55 @@ export class ResourcesController {
 
     const newResource = await this.resourcesService.create(createResourceDto);
     return { data: newResource, message: 'Resource created succesfully' };
+  }
+
+  @Get()
+  async findAll(
+    @PaginationParams() paginationParams: Pagination,
+    @Query('q') q: string,
+  ) {
+    const resources = await this.resourcesService.findAll(paginationParams, q);
+    const total = await this.resourcesService.countAll();
+    const { page, size } = paginationParams;
+    const pages = Math.ceil(total / size);
+    return {
+      page,
+      totalPages: pages,
+      resourcesPerPage: size,
+      message: 'Got resources succesfully',
+      data: resources,
+    };
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', IsMongooseIdPipe) id: string) {
+    const resource = await this.resourcesService.findOne(id);
+    if (resource == null) {
+      throw new NotFoundException('Resource not found');
+    }
+    return { data: resource, message: 'Got resource' };
+  }
+
+  @Patch(':id')
+  async update(
+    @Param('id', IsMongooseIdPipe) id: string,
+    @Body() updateResourceDto: UpdateResourceDto,
+  ) {
+    const resource: ResourcesDocument = await this.resourcesService.findOne(id);
+    if (resource == null) {
+      throw new NotFoundException('Resource not found');
+    }
+    return this.resourcesService.update(id, updateResourceDto);
+  }
+
+  @HttpCode(204)
+  @Delete(':id')
+  async remove(@Param('id', IsMongooseIdPipe) id: string) {
+    const resource = await this.resourcesService.findOne(id);
+    if (resource == null) {
+      throw new BadRequestException('Resource does not exist');
+    }
+    return await this.resourcesService.remove(id);
   }
 
   @Post('/upload-images/:resourceId')
@@ -113,51 +163,5 @@ export class ResourcesController {
     await this.resourcesService.deleteResourceImages(resource);
     resource.images = [];
     await resource.save();
-  }
-
-  @Get()
-  async findAll(@PaginationParams() paginationParams: Pagination) {
-    const resources = await this.resourcesService.findAll(paginationParams);
-    const total = await this.resourcesService.countAll();
-    const { page, size } = paginationParams;
-    const pages = Math.ceil(total / size);
-    return {
-      page,
-      totalPages: pages,
-      resourcesPerPage: size,
-      message: 'Got resources succesfully',
-      data: resources,
-    };
-  }
-
-  @Get(':id')
-  async findOne(@Param('id', IsMongooseIdPipe) id: string) {
-    const resource = await this.resourcesService.findOne(id);
-    if (resource == null) {
-      throw new NotFoundException('Resource not found');
-    }
-    return { data: resource, message: 'Got resource' };
-  }
-
-  @Patch(':id')
-  async update(
-    @Param('id', IsMongooseIdPipe) id: string,
-    @Body() updateResourceDto: UpdateResourceDto,
-  ) {
-    const resource: ResourcesDocument = await this.resourcesService.findOne(id);
-    if (resource == null) {
-      throw new NotFoundException('Resource not found');
-    }
-    return this.resourcesService.update(id, updateResourceDto);
-  }
-
-  @HttpCode(204)
-  @Delete(':id')
-  async remove(@Param('id', IsMongooseIdPipe) id: string) {
-    const resource = await this.resourcesService.findOne(id);
-    if (resource == null) {
-      throw new BadRequestException('Resource does not exist');
-    }
-    return await this.resourcesService.remove(id);
   }
 }

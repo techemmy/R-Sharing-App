@@ -1,10 +1,10 @@
 [
   {
-    "resource_type": "PQ",
-    "resource_year": 2023,
-    "course_name": "Database Systems",
-    "course_code": "CSC 343",
-    "resource_type": "PQ",
+    "resourceType": "PQ",
+    "resourceYear": 2023,
+    "courseName": "Database Systems",
+    "courseCode": "CSC 343",
+    "resourceType": "PQ",
     "school": {
       "name": "Redeemer's University",
       "acronym": "RUN"
@@ -16,10 +16,10 @@
     "imageURL": "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-note-paper-pattern-illustration-image_1469684.jpg"
   },
   {
-    "resource_type": "PQ",
-    "resource_year": 2024,
-    "course_name": "Programming",
-    "course_code": "CSC 100",
+    "resourceType": "PQ",
+    "resourceYear": 2024,
+    "courseName": "Programming",
+    "courseCode": "CSC 100",
     "school": {
       "name": "Obafemi Awolowo University",
       "acronym": "OAU"
@@ -31,10 +31,10 @@
     "imageURL": "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-note-paper-pattern-illustration-image_1469684.jpg"
   },
   {
-    "resource_type": "Note",
-    "resource_year": 2000,
-    "course_name": "Economics of Thesis",
-    "course_code": "ECO 201",
+    "resourceType": "Note",
+    "resourceYear": 2000,
+    "courseName": "Economics of Thesis",
+    "courseCode": "ECO 201",
     "school": {
       "name": "Olabisi Onabanjo Univeristy",
       "acronym": "OOU"
@@ -46,10 +46,10 @@
     "imageURL": "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-note-paper-pattern-illustration-image_1469684.jpg"
   },
   {
-    "resource_type": "Note",
-    "resource_year": 2020,
-    "course_name": "Introduction to Law",
-    "course_code": "LAW 101",
+    "resourceType": "Note",
+    "resourceYear": 2020,
+    "courseName": "Introduction to Law",
+    "courseCode": "LAW 101",
     "school": {
       "name": "Redeemer's University",
       "acronym": "RUN"

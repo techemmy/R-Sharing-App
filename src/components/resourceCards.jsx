@@ -1,15 +1,14 @@
-import jsonData from "../apiResources/dummy-1.json";
 import Card from "./card";
 
-const ResourceCards = () => {
+const ResourceCards = ({ resources }) => {
   return (
     <div className="flex flex-col gap-4">
-      {jsonData.map((item) => (
+      {resources.map((item) => (
         <Card
           image={item.imageURL}
-          label={item.course_name}
-          key={item.course_code}
-          id={item.course_code}
+          label={item.courseName}
+          key={item.courseCode}
+          id={item.courseCode}
         />
       ))}
     </div>

@@ -1,13 +1,11 @@
-import { useState } from "react";
 import images from "../assets/assets";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = ({ layout }) => {
-  // const [open, setOpen] = useState(true);
-
+const Sidebar = ({ layout, handleChangeResourceType }) => {
   const menus = [
-    { id: 1, title: "ALL RESOURCES", path: "/feed" },
-    { id: 2, title: "PAST QUESTIONS", path: "/blah" },
+    { id: 1, title: "ALL RESOURCES", path: "/feed", action: 'all' },
+    { id: 9, title: "NOTES", path: "/blah", action: 'notes' },
+    { id: 2, title: "PAST QUESTIONS", path: "/blah", action: 'pq' },
     { id: 3, title: "PDFS", path: "/pdfs" },
     { id: 4, title: "NOTES", path: "/handwritten-notes" },
     { id: 5, title: "Setting", path: "/settings" },
@@ -15,11 +13,9 @@ const Sidebar = ({ layout }) => {
 
   return (
     <div
-      className={` ${
-        open ? "w-25" : "w-20 "
-      } bg-black  p-5 min-h-screen pt-8  ${
-        layout === "right" && "right-0"
-      } fixed duration-300`}
+      className={` ${open ? "w-25" : "w-20 "
+        } bg-black  p-5 min-h-screen pt-8  ${layout === "right" && "right-0"
+        } fixed duration-300`}
     >
       <div className="flex gap-x-1 items-center">
         <img
@@ -27,9 +23,8 @@ const Sidebar = ({ layout }) => {
           className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
         />
         <h1
-          className={`text-white origin-left font-medium text-xl duration-200 ${
-            !open && "scale-0"
-          }`}
+          className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
+            }`}
         >
           ORORO NOTE
         </h1>
@@ -45,10 +40,10 @@ const Sidebar = ({ layout }) => {
         {menus.map((menu) => (
           <NavLink
             key={menu.id}
-            to={menu.path}
+            // to={menu.path}
+            onClick={() => handleChangeResourceType(menu.action)}
             className={({ isActive }) =>
-              `flex rounded-md py-1.5 cursor-pointer text-sm items-center gap-1 ${
-                isActive ? "bg-light-white text-gray-900" : "text-gray-300"
+              `flex rounded-md py-1.5 cursor-pointer text-sm items-center gap-1 ${isActive ? "bg-light-white text-gray-900" : "text-gray-300"
               }`
             }
           >

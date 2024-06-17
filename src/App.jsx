@@ -10,6 +10,7 @@ import {
 import Registration from "./pages/signupForm";
 import LandingPage from "./pages/landingPage";
 import AuthProvider, { ProtectedRoute } from './provider/authProvider'
+import ResourceCards from "./components/resourceCards";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

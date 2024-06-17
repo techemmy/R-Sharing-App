@@ -42,23 +42,22 @@ export class ResourcesService {
     }
 
     const { limit, offset } = paginationParams;
+
+    let resourceQuery = this.resourceModel.find();
     if (q) {
-      return this.resourceModel
-        .find({
-          $or: [
-            { courseName: { $regex: q, $options: 'i' } },
-            { courseCode: { $regex: q, $options: 'i' } },
-          ],
-        })
-        .where({ resourceType })
-        .limit(limit)
-        .skip(offset);
+      resourceQuery = resourceQuery.find({
+        $or: [
+          { courseName: { $regex: q, $options: 'i' } },
+          { courseCode: { $regex: q, $options: 'i' } },
+        ],
+      });
     }
-    return this.resourceModel
-      .find({})
-      .where({ resourceType })
-      .limit(limit)
-      .skip(offset);
+
+    if (resourceType) {
+      resourceQuery = resourceQuery.where({ resourceType });
+    }
+
+    return resourceQuery.limit(limit).skip(offset);
   }
 
   countAll() {

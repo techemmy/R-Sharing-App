@@ -108,6 +108,20 @@ export class ResourcesController {
     return await this.resourcesService.remove(id);
   }
 
+  @Patch('/star/:resourceId')
+  async starAResource(
+    @Param('resourceId', IsMongooseIdPipe) resourceId: string,
+  ) {
+    const resource = await this.resourcesService.findOne(resourceId);
+    if (resource == null) {
+      throw new BadRequestException('Resource does not exist');
+    }
+
+    resource.stars++;
+    await resource.save();
+    return { data: resource, message: 'Resource starred!' };
+  }
+
   @Post('/upload-images/:resourceId')
   @UseInterceptors(FilesInterceptor('images'))
   async uploadResourceImages(

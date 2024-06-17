@@ -15,6 +15,7 @@ export class User {
     required: true,
     type: mongoose.Schema.Types.ObjectId,
     ref: School.name,
+    default: null
   })
   school: School;
 

@@ -10,8 +10,9 @@ export default function Card({ resource }) {
       <div className="flex-1 space-y-2 h-full flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-indigo-500">{resource.courseName}</h3>
-            <p className="text-sm text-gray-500">{resource.courseCode}</p>
+            <h3 className="text-lg font-semibold">{resource.courseName}</h3>
+            <p className="text-sm font-bold text-indigo-500">{resource.courseCode}</p>
+            <p className="text-sm text-indigo-500">Slides: {resource.images.length}</p>
           </div>
           <div className="flex items-center gap-1">
             <svg

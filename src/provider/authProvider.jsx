@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const logIn = (token) => {
     reEvaluateToken(token);
     setToken_(token);
-    return <Navigate to="/" />
+    return <Navigate to="/home" />
   }
 
   useEffect(() => {

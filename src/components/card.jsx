@@ -11,7 +11,8 @@ export default function Card({ resource }) {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold">{resource.courseName}</h3>
-            <p className="text-sm text-gray-500">{resource.courseCode}</p>
+            <p className="text-sm font-bold text-indigo-500">{resource.courseCode}</p>
+            <p className="text-sm text-indigo-500">Slides: {resource.images.length}</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -36,7 +37,7 @@ export default function Card({ resource }) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-4 h-4"
+            className="w-4 h-4 fill-indigo-500"
           >
             <path
               strokeLinecap="round"
@@ -46,7 +47,7 @@ export default function Card({ resource }) {
           </svg>
           <span>{resource.creator.username}</span>
           <span>·</span>
-          <span>{resource.resourceType}</span>
+          <span className="bg-indigo-500 text-white p-1 rounded">{resource.resourceType}</span>
           <span>·</span>
           <span>{resource.school.acronym}</span>
         </div>

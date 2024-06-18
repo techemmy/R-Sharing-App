@@ -4,7 +4,7 @@ import Button from "../components/button";
 import { useAuth } from "../provider/authProvider";
 import React from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const { logIn } = useAuth();
@@ -24,10 +24,11 @@ const Signin = () => {
     try {
       const resp = await api.post('/auth/login', { emailOrUsername, password })
       if (resp.status === 200) {
+        logIn(resp.data.access_token)
         alert('Login successful!')
+        return navigate('/home')
       }
-      logIn(resp.data.access_token)
-      navigate('/home')
+      alert(resp.response.data.message);
     } catch (error) {
       const { response: { data } } = error;
       alert(data.message)

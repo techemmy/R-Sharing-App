@@ -12,14 +12,16 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
-    if (response.data && response.data?.statusCode === 401) {
+    console.log("1");
+    if (response?.data && response.data?.statusCode === 401) {
       document.cookie = "token=";
       document.location.assign("/login");
     }
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    console.log("2");
+    if (error?.response?.status === 401) {
       document.cookie = "token=";
       document.location.assign("/login");
     }

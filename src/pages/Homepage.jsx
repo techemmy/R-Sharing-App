@@ -28,10 +28,9 @@ export default function HomePage() {
         setResources(resp.data.data)
         setStatus(possibleStatus.resolved)
       } else {
-        alert(resp.response.data.message)
+        throw new Error(resp?.response?.data?.message)
       }
     }).catch(error => {
-      console.log(error);
       setStatus(possibleStatus.rejected)
     })
   }, [filter])
@@ -53,6 +52,7 @@ export default function HomePage() {
             <SearchInput />
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
+            {status === possibleStatus.rejected ? "Check your internet connection and refresh.\n You're disconnected from the server" : ''}
             {status === possibleStatus.pending ? Loader : <ResourceCards resources={resources} />}
           </div>
         </div>

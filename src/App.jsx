@@ -1,5 +1,5 @@
 import Signin from "./pages/signin";
-import HomePage from "./testPagesjsx/homepage";
+import HomePage from "./pages/Homepage";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,7 +10,6 @@ import {
 import Registration from "./pages/signupForm";
 import LandingPage from "./pages/landingPage";
 import AuthProvider, { ProtectedRoute } from './provider/authProvider'
-import ResourceCards from "./components/resourceCards";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

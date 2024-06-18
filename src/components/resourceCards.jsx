@@ -1,19 +1,8 @@
-import Card from "./card";
+import Card from "./Card";
 
-const ResourceCards = ({ resources }) => {
-  const resourcesCard = resources.map((item) => (
-    <Card
-      image={item.imageURL}
-      label={item.courseName}
-      key={item.courseCode}
-      id={item.courseCode}
-    />
-  ))
-  return (
-    <div className="flex flex-col gap-4">
-      {resourcesCard.length > 0 ? resourcesCard : 'No Resource Found'}
-    </div>
-  );
+export default function ResourceCards({ resources }) {
+  const resourceCards = resources.map((resource) => {
+    return <Card key={`${resource.name}-${resource.code}`} resource={resource} />
+  })
+  return resourceCards
 };
-
-export default ResourceCards;

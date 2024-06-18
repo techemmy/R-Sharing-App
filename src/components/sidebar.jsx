@@ -1,61 +1,53 @@
-import images from "../assets/assets";
-import { NavLink } from "react-router-dom";
-import { RESOURCE_TYPE } from '../testPagesjsx/homepage'
+import { RESOURCE_TYPE } from '../constants'
+import { Link, NavLink } from "react-router-dom";
 
-const Sidebar = ({ layout, handleChangeResourceType }) => {
-  const menus = [
-    { id: 1, title: "ALL RESOURCES", path: "/feed", action: RESOURCE_TYPE.All },
-    { id: 9, title: "NOTES", path: "/blah", action: RESOURCE_TYPE.Note },
-    { id: 2, title: "PAST QUESTIONS", path: "/blah", action: RESOURCE_TYPE.PastQuestion },
-    { id: 3, title: "PDFS", path: "/pdfs" },
-    { id: 4, title: "NOTES", path: "/handwritten-notes" },
-    { id: 5, title: "Setting", path: "/settings" },
-  ];
-
+const Sidebar = ({ handleFilterChange }) => {
   return (
-    <div
-      className={` ${open ? "w-25" : "w-20 "
-        } bg-black  p-5 min-h-screen pt-8  ${layout === "right" && "right-0"
-        } fixed duration-300`}
-    >
-      <div className="flex gap-x-1 items-center">
-        <img
-          src={images.logo}
-          className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"}`}
-        />
-        <h1
-          className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
-            }`}
-        >
-          ORORO NOTE
-        </h1>
+    <nav className="bg-gray-50 dark:bg-gray-50 p-4 md:p-6 flex flex-col gap-4 h-max">
+      <div className="flex items-center gap-2">
+        <h2 className="text-lg font-semibold">Resources</h2>
       </div>
-      <ul className="pt-6">
-        <li>
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full mb-1 sidebar-input bg-black border border-gray-300 p-1 rounded-sm"
-          />
-        </li>
-        {menus.map((menu) => (
-          <NavLink
-            key={menu.id}
-            // to={menu.path}
-            onClick={() => handleChangeResourceType(menu.action)}
-            className={({ isActive }) =>
-              `flex rounded-md py-1.5 cursor-pointer text-sm items-center gap-1 ${isActive ? "bg-light-white text-gray-900" : "text-gray-300"
-              }`
-            }
+      <div className="flex flex-col gap-2">
+        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Filter</h3>
+        <div className="flex flex-col gap-1">
+          {Object.keys(RESOURCE_TYPE).map(type => {
+            return (<NavLink
+              key={`${type}-${RESOURCE_TYPE[type]}`}
+              href="#"
+              className="text-base font-medium hover:text-gray-900 dark:hover:text-gray-50"
+              onClick={() => handleFilterChange(RESOURCE_TYPE[type])}
+            >
+              {type}
+            </NavLink>)
+          })}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Coming Soon</h3>
+        <div className="flex flex-col gap-1">
+          <Link
+            href="#"
+            className="text-base font-medium hover:text-gray-900 dark:hover:text-gray-50"
           >
-            <img src={images.Setting} />
-            <span className={`${!open && "hidden"} origin-left duration-200`}>
-              {menu.title}
-            </span>
-          </NavLink>
-        ))}
-      </ul>
-    </div>
-  );
+            Paid Notes
+          </Link>
+          <Link
+            href="#"
+            className="text-base font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          >
+            PDFs
+          </Link>
+          <Link
+            href="#"
+            className="text-base font-medium hover:text-gray-900 dark:hover:text-gray-50"
+          >
+            More...
+          </Link>
+        </div>
+      </div>
+    </nav>
+  )
 };
+
 export default Sidebar;

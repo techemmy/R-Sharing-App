@@ -7,6 +7,7 @@ import {
 } from 'class-validator';
 import { ResourceType } from '../enums/resources.enums';
 import { Image } from '../schemas/resources.schema';
+import { Transform } from 'class-transformer';
 
 export class CreateResourceDto {
   @IsString()
@@ -15,6 +16,7 @@ export class CreateResourceDto {
   resourceType: string;
 
   @IsInt()
+  @Transform(({ value }) => parseInt(value))
   resourceYear: number;
 
   @IsString()
@@ -24,11 +26,11 @@ export class CreateResourceDto {
   @IsString()
   courseCode: string;
 
-  @IsMongoId()
+  @IsMongoId({ message: 'Enter a valid school' })
   @IsNotEmpty()
   school: string;
 
-  @IsMongoId()
+  @IsMongoId({ message: 'Enter a valid creator' })
   @IsNotEmpty()
   creator: string;
 

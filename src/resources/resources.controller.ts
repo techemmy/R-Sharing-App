@@ -140,6 +140,9 @@ export class ResourcesController {
     @UploadedFiles() images: Array<Express.Multer.File>,
     @Param('resourceId', IsMongooseIdPipe) resourceId: string,
   ) {
+    if (!images || images.length <= 0) {
+      throw new BadRequestException('No images found.');
+    }
     const resource = await this.resourcesService.findOne(resourceId);
     if (resource == null)
       throw new NotFoundException('Resource does not exist');

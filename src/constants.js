@@ -18,6 +18,11 @@ export const RESOURCES_FILTER = {
     ),
 };
 
+export const headerViews = {
+  Home: "home",
+  CreateResource: "create-resource",
+};
+
 export const sampleResources = [
   {
     id: 1,

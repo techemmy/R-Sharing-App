@@ -1,7 +1,6 @@
 import Signin from "./pages/signin";
 import HomePage from "./pages/Homepage";
 import {
-  BrowserRouter as Router,
   Route,
   createBrowserRouter,
   createRoutesFromElements,
@@ -9,6 +8,7 @@ import {
 } from "react-router-dom";
 import Registration from "./pages/signupForm";
 import LandingPage from "./pages/landingPage";
+import CreateResourcePage from "./pages/CreateResourcePage";
 import AuthProvider, { ProtectedRoute } from './provider/authProvider'
 
 const router = createBrowserRouter(
@@ -17,6 +17,7 @@ const router = createBrowserRouter(
       <Route exact path="/" element={<LandingPage />}></Route>
       <Route element={<ProtectedRoute />} >
         <Route path="/home" element={<HomePage />}></Route>
+        <Route path="/create-resource" element={<CreateResourcePage />}></Route>
       </Route>
       <Route path="/login" element={<Signin />}></Route>
       <Route path="/signup" element={<Registration />}></Route>

@@ -4,14 +4,14 @@ export default function Card({ resource }) {
   return (
     <div
       key={resource._id}
-      className="bg-white dark:bg-gray-950 rounded-lg shadow-sm flex items-start gap-4 p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className="bg-white rounded-lg shadow-sm flex items-start gap-4 p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
       <img src={resource.images[0] ? resource.images[0]?.url : images.Folder} alt={resource.courseName} className="rounded-lg w-20 h-20 object-cover" />
       <div className="flex-1 space-y-2 h-full flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold">{resource.courseName}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{resource.courseCode}</p>
+            <p className="text-sm text-gray-500">{resource.courseCode}</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -29,7 +29,7 @@ export default function Card({ resource }) {
             <span className="text-sm font-medium">{resource.stars.length}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex items-center gap-2 text-sm text-gray-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -7,7 +7,7 @@ export default function SearchInput() {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-5 h-5 text-gray-500 dark:text-gray-400"
+        className="w-5 h-5 text-gray-500"
       >
         <path
           strokeLinecap="round"
@@ -18,7 +18,7 @@ export default function SearchInput() {
       <input
         type="search"
         placeholder="Search resources..."
-        className="max-w-xs bg-white dark:bg-gray-950 rounded-md border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary dark:focus:ring-primary"
+        className="max-w-xs bg-white rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
       />
     </div>
   )

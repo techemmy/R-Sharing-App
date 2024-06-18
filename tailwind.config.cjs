@@ -54,7 +54,7 @@ module.exports = {
           ".space-x": spacingUtilities, // Add spacing utilities
           ".border-width": borderWidthUtilities, // Add border width utilities
         },
-        ["responsive", "hover"]
+        ["responsive", "hover"],
       ); // Optional variants for responsiveness and hover states
     }),
   ],

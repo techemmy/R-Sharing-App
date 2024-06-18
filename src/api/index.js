@@ -1,5 +1,4 @@
 import axios from "axios";
-import { redirect } from "react-router";
 const env = import.meta.env;
 
 const API_V1_URL = env.VITE_API_V1_URL;

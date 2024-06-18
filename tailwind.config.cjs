@@ -16,6 +16,7 @@ module.exports = {
       // spacing: generateSpacingScale(100, 0.1),
       // borderWidth: generateSpacingScale(50, 0.1),
       colors: {
+        primary: "gold",
         "dark-purple": "#081A51",
         "light-white": "rgba(255,255,255,0.17)",
       },

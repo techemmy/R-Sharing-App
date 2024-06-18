@@ -39,7 +39,7 @@ export default function HomePage() {
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
   }
-  const Loader = (<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>)
+  const Loader = (<div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>)
 
   return (
     <>
@@ -47,8 +47,8 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 p-4 md:p-6">
         <Sidebar handleFilterChange={handleResourceTypeChange} />
 
-        <div className="grid gap-4">
-          <div className="flex flex-wrap gap-2 items-center justify-between">
+        <div className="grid">
+          <div className="flex flex-wrap gap-2 items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
             <SearchInput />
           </div>

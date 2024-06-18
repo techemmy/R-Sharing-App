@@ -43,7 +43,10 @@ export class ResourcesService {
 
     const { limit, offset } = paginationParams;
 
-    let resourceQuery = this.resourceModel.find();
+    let resourceQuery = this.resourceModel
+      .find()
+      .populate('school')
+      .populate('creator', '-password');
     if (q) {
       resourceQuery = resourceQuery.find({
         $or: [
@@ -65,7 +68,10 @@ export class ResourcesService {
   }
 
   findOne(id: string) {
-    return this.resourceModel.findById(id);
+    return this.resourceModel
+      .findById(id)
+      .populate('school')
+      .populate('creator', '-password');
   }
 
   update(id: string, updateResourceDto: UpdateResourceDto) {

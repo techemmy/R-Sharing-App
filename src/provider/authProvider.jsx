@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import api from "../api/index";
-import { useJwt } from "react-jwt";
+import { decodeToken, useJwt } from "react-jwt";
 
 const AuthContext = createContext();
 
@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
     const cookie = document.cookie.split(";").filter(key => key.startsWith("token"))
     return cookie[0]?.split("=")[1]
   });
-  const { decodedToken: user, isExpired, reEvaluateToken } = useJwt(token);
+  const { isExpired, reEvaluateToken } = useJwt(token);
 
   const logOut = () => {
     setToken_(null);
@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
     () => ({
       token,
       isExpired,
-      user,
+      user: decodeToken(token),
       logIn,
       logOut
     }),

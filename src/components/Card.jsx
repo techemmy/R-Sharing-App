@@ -19,7 +19,7 @@ export default function Card({ resource }) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-5 h-5 fill-primary"
+              className={resource.stars.length > 0 ? "w-5 h-5 fill-primary" : "w-5 h-5"}
             >
               <path
                 fillRule="evenodd"
@@ -52,7 +52,7 @@ export default function Card({ resource }) {
           <span>{resource.school.acronym}</span>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

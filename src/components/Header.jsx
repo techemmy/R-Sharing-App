@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useNavigation } from "react-router-dom";
 import { headerViews } from "../constants";
 import { useAuth } from "../provider/authProvider"
 import Logo from './Logo'
@@ -6,6 +6,9 @@ import Logo from './Logo'
 export default function Header({ view = headerViews.Home }) {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const navigation = useNavigation();
+  console.log(navigation);
+
   const homeBtnView = (
     <>
       <button
@@ -36,7 +39,7 @@ export default function Header({ view = headerViews.Home }) {
         className="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
         type="button"
       >
-        Create Resource
+        {navigation.state === "loading" ? "Loading..." : "Create Resource"}
       </Link>
     </>
   )
@@ -45,7 +48,9 @@ export default function Header({ view = headerViews.Home }) {
     <Link
       className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-5 py-3 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring"
       type="button"
-      onClick={() => navigate(-1)}
+      onClick={() => {
+        return navigate(-1)
+      }}
     >
       <span className="text-sm font-medium">Go Back</span>
 

@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { headerViews } from "../constants";
 import { useAuth } from "../provider/authProvider"
+import Logo from './Logo'
 
 export default function Header({ view = headerViews.Home }) {
   const { user } = useAuth();
@@ -84,7 +85,7 @@ export default function Header({ view = headerViews.Home }) {
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
             <Link to={'/home'}>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-transparent sm:text-3xl">Compass</h1>
+              <Logo />
             </Link>
             <p className="mt-1.5 text-lg text-gray-500">Welcome, {user.username}! 🎉</p>
           </div>

@@ -43,7 +43,6 @@ const AuthProvider = ({ apiClient, children }) => {
     console.log('tokenRef', accessTokenRef.current)
     if (token) {
       document.cookie = `token=${token}`
-      alert('about to set')
     } else {
       delete api.defaults.headers.common["Authorization"];
       document.cookie = `token=`;
@@ -76,7 +75,6 @@ export const ProtectedRoute = () => {
   const { token, isExpired } = useAuth();
 
   if (!token || isExpired) {
-    alert(`red,${isExpired}`)
     return <Navigate to="/login" />;
   }
 

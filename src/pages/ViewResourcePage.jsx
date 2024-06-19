@@ -7,7 +7,7 @@ export default function ViewResourcePage() {
   console.log(data);
   const imagesCards = data.images.map(image => {
     return (
-      <div className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">
+      <div key={image.id} className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">
         <img src={image.url} alt="Resource Image 1" className="w-full h-auto object-cover" />
         <button
           type="button"

@@ -1,10 +1,11 @@
-import ResourceCards from "../components/ResourceCards";
 import Sidebar from "../components/Sidebar";
 import { useEffect, useState } from "react";
 import api from "../api/"
 import Header from "../components/Header"
 import SearchInput from "../components/SearchInput"
 import { RESOURCE_TYPE } from "../constants"
+import LoadingResourceCards from "../components/LoadingResourceCards"
+import ResourceCards from "../components/ResourceCards";
 
 const possibleStatus = {
   idle: 'idle',
@@ -25,8 +26,9 @@ export default function HomePage() {
     }
     ).then(resp => {
       if (resp.status === 200) {
-        setResources(resp.data.data)
+        console.log(200, resp.data)
         setStatus(possibleStatus.resolved)
+        setResources(resp.data.data)
       } else {
         throw new Error(resp?.response?.data?.message)
       }
@@ -38,7 +40,25 @@ export default function HomePage() {
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
   }
-  const Loader = (<div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>)
+
+  let response;
+  switch (status) {
+    case possibleStatus.idle:
+      response = <LoadingResourceCards />
+      break;
+    case possibleStatus.pending:
+      response = <LoadingResourceCards />;
+      break
+    case possibleStatus.resolved:
+      response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p>{resources.length} resources found</p>;
+      break
+    case possibleStatus.rejected:
+      response = <p>Something went wrong</p>
+      break
+    default:
+      response = <p>Check your internet connection and refresh.\n You're disconnected from the server</p>
+      break;
+  }
 
   return (
     <>
@@ -52,8 +72,7 @@ export default function HomePage() {
             <SearchInput />
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
-            {status === possibleStatus.rejected ? "Check your internet connection and refresh.\n You're disconnected from the server" : ''}
-            {status === possibleStatus.pending ? Loader : <ResourceCards resources={resources} />}
+            {response}
           </div>
         </div>
       </div>

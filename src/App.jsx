@@ -9,9 +9,11 @@ import {
 import Registration from "./pages/signupForm";
 import LandingPage from "./pages/landingPage";
 import CreateResourcePage from "./pages/CreateResourcePage";
-import AuthProvider, { ProtectedRoute, useAuth } from './provider/authProvider'
-import { createResourceAction, createResoureceLoader } from "./loadersAndAction";
+import AuthProvider, { ProtectedRoute, } from './provider/authProvider'
+import { createResourceAction, createResoureceLoader, viewResourceLoader } from "./loadersAndAction";
 import ErrorPage from './pages/ErrorPage'
+import ViewResourcePage from "./pages/ViewResourcePage";
+import api from "./api";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +22,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />} >
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/create-resource" loader={createResoureceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
+        <Route path='/view-resource/:resourceId' loader={viewResourceLoader(api)} element={<ViewResourcePage />}></Route>
       </Route>
       <Route path="/login" element={<Signin />}></Route>
       <Route path="/signup" element={<Registration />}></Route>
@@ -29,7 +32,7 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <AuthProvider>
+    <AuthProvider apiClient={api}>
       <RouterProvider router={router} />;
 
     </AuthProvider>

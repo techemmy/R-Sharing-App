@@ -26,7 +26,6 @@ export default function HomePage() {
     }
     ).then(resp => {
       if (resp.status === 200) {
-        console.log(200, resp.data)
         setStatus(possibleStatus.resolved)
         setResources(resp.data.data)
       } else {

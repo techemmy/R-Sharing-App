@@ -8,9 +8,11 @@ export default function ViewResourcePage() {
     return (
       <div key={image.id} className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">
         <img src={image.url} alt="Resource Image 1" className="w-full h-auto object-cover" />
-        <button
+        <a
           type="button"
           className="absolute bottom-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          href={image?.url}
+          download={`${data.courseName} - ${data.courseType}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +29,7 @@ export default function ViewResourcePage() {
             />
           </svg>
           <span className="sr-only">Download</span>
-        </button>
+        </a>
       </div>
     )
   })

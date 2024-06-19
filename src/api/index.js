@@ -12,7 +12,6 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => {
-    console.log("1");
     if (response?.data && response.data?.statusCode === 401) {
       document.cookie = "token=";
       document.location.assign("/login");
@@ -20,7 +19,6 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log("2");
     if (error?.response?.status === 401) {
       document.cookie = "token=";
       document.location.assign("/login");

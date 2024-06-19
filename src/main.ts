@@ -13,7 +13,14 @@ import { HttpExceptionFilter } from './http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: [
+      'http://localhost:3000',
+      'https://acrid-hour-snotty-hand-production.pipeops.app',
+    ],
+    credentials: true,
+    allowedHeaders: '*',
+  });
   app.setGlobalPrefix('/api');
   app.enableVersioning({ type: VersioningType.URI });
   app.useGlobalPipes(

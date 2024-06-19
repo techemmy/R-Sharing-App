@@ -4,7 +4,6 @@ import { headerViews } from "../constants";
 
 export default function ViewResourcePage() {
   const { data: { data: { data } } } = useLoaderData()
-  console.log(data);
   const imagesCards = data.images.map(image => {
     return (
       <div key={image.id} className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">

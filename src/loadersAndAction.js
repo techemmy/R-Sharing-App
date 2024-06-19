@@ -4,10 +4,8 @@ import api from "./api";
 export const viewResourceLoader =
   (apiClient) =>
   async ({ params }) => {
-    console.log("here", apiClient.defaults.headers.common);
     try {
       const data = await apiClient.get(`/resources/${params.resourceId}`);
-      console.log("data", apiClient.defaults.headers.common);
       return { data };
     } catch (error) {
       alert(`An error occured: ${error.message}`);
@@ -42,9 +40,7 @@ export async function createResourceAction({ request }) {
     alert(`${createdResource.message}. Uploading images...`);
 
     const resourceId = createdResource.data._id;
-    console.log(resourceId);
 
-    console.log("uploading", [...formData.entries()]);
     const uploadResourceImgReq = await api.post(
       `/resources/upload-images/${resourceId}`,
       formData,
@@ -54,7 +50,6 @@ export async function createResourceAction({ request }) {
         },
       },
     );
-    console.log("uploaded:", uploadResourceImgReq);
     if (!uploadResourceImgReq.status) {
       const errorMessage = uploadResourceImgReq.response.data.message;
       console.log("what happened", errorMessage);

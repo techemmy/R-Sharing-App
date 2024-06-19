@@ -27,29 +27,12 @@ const AuthProvider = ({ apiClient, children }) => {
   }
 
   useEffect(() => {
-    // const requestInterceptor = apiClient.interceptors.request.use(
-    //   (config) => {
-    //     // Attach current access token ref value to outgoing request headers
-    //     console.log('setting', accessTokenRef.current, config.headers)
-    //     config.headers["Authorization"] = `Bearer ${accessTokenRef.current}`;
-    //     return config;
-    //   },
-    // );
-
-
-    console.log('token', token)
-    console.log('tokenRef', accessTokenRef.current)
     if (token) {
       document.cookie = `token=${token}`
     } else {
       delete api.defaults.headers.common["Authorization"];
       document.cookie = `token=`;
     }
-
-    return () => {
-      console.log('cleaning up')
-      // apiClient.interceptors.request.eject(requestInterceptor);
-    };
   }, [token]);
 
   const contextValue = {

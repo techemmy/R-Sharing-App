@@ -9,8 +9,9 @@ export default function Header({ view = headerViews.Home }) {
   const homeBtnView = (
     <>
       <button
-        className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-5 py-3 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring"
+        className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white px-5 py-3 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring cursor-not-allowed"
         type="button"
+        disabled
       >
         <span className="text-sm font-medium"> View Profile </span>
 

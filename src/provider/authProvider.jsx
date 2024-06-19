@@ -13,8 +13,6 @@ const AuthProvider = ({ apiClient, children }) => {
   const { isExpired, reEvaluateToken } = useJwt(token);
   const accessTokenRef = useRef(document.cookie.split(";").filter(key => key.startsWith("token"))[1]);
 
-  console.log('rerendering?', token)
-  console.log('rerendering?', accessTokenRef.current)
   const logOut = () => {
     setToken_(null);
     return <Navigate to="/" replace={true} />;

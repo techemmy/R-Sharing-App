@@ -8,10 +8,10 @@ export default function LoadingResourceCards() {
     resources.push({
       _id: `loading-${i}`,
       images: [images.Search],
-      resourceType: "<i>Loading...</i>",
+      resourceType: "Loading...",
       resourceYear: 0,
-      courseName: "<i>Loading...</i>",
-      courseCode: "<i>Loading...</i>",
+      courseName: "Loading...",
+      courseCode: "Loading...",
       school: {
         name: "...",
         acronym: "..."

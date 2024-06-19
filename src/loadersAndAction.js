@@ -14,7 +14,6 @@ export async function createResoureceLoader() {
 export async function createResourceAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData.entries());
-  formData.append("images", formData.getAll("images"));
 
   try {
     const createResourceReq = await api.post("/resources", data);
@@ -31,10 +30,10 @@ export async function createResourceAction({ request }) {
     const resourceId = createdResource.data._id;
     console.log(resourceId);
 
-    console.log("uploading", formData.get("images"));
+    console.log("uploading", [...formData.entries()]);
     const uploadResourceImgReq = await api.post(
       `/resources/upload-images/${resourceId}`,
-      data,
+      formData,
       {
         headers: {
           "Content-Type": "multipart/form-data",

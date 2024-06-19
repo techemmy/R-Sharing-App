@@ -20,7 +20,7 @@ export default function HomePage() {
 
   useEffect(() => {
     setStatus(possibleStatus.pending);
-    api.get('/resources', {
+    api.get('/resources?size=100', {
       params: { type: filter }
     }
     ).then(resp => {

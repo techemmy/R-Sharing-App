@@ -63,6 +63,7 @@ const Registration = () => {
                   Username
                 </label>
                 <input
+                  required
                   ref={usernameInputRef}
                   id="username"
                   name="username"
@@ -76,6 +77,7 @@ const Registration = () => {
                   Email
                 </label>
                 <input
+                  required
                   ref={emailInputRef}
                   name="email"
                   id="email"
@@ -89,6 +91,7 @@ const Registration = () => {
                   Password
                 </label>
                 <input
+                  required
                   ref={passwordInputRef}
                   name="password"
                   id="password"
@@ -129,41 +132,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-//
-//
-//
-//
-//
-//
-//
-
-// <label htmlFor="full name">Full Name:</label>
-// <input
-//   type="text"
-//   id="fullname"
-//   name="fullName"
-//   value={formData.fullName}
-//   onChange={handleChange}
-//   placeholder="Abhinav Bisht"
-// />
-
-// <label htmlFor="email">Email:</label>
-// <input
-// type="email"
-// id="email"
-// name="email"
-//   value={formData.email}
-//   onChange={handleChange}
-//   placeholder="Bishtabhi02@gmail.com"
-// />
-
-// <label htmlFor="password">Password: </label>
-// <input
-// type="password"
-// id="password"
-// name="password"
-//   value={formData.password}
-//   onChange={handleChange}
-//   placeholder="***********"
-// />

@@ -30,8 +30,9 @@ export default function CreateResourcePage() {
                         id="resource-type"
                         className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
                         name="resourceType"
+                        required
                       >
-                        <option>Select type</option>
+                        <option value="">Select type</option>
                         <option value="PQ">Past Question (PQ)</option>
                         <option value="NOTE">Note</option>
                       </select>
@@ -44,6 +45,7 @@ export default function CreateResourcePage() {
                   </label>
                   <div className="mt-2">
                     <input
+                      required
                       type="number"
                       id="resource-year"
                       placeholder="Enter year"
@@ -60,6 +62,7 @@ export default function CreateResourcePage() {
                   </label>
                   <div className="mt-2">
                     <input
+                      required
                       id="course-name"
                       placeholder="Enter course name"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
@@ -73,6 +76,7 @@ export default function CreateResourcePage() {
                   </label>
                   <div className="mt-2">
                     <input
+                      required
                       id="course-code"
                       placeholder="Enter course code"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
@@ -91,6 +95,7 @@ export default function CreateResourcePage() {
                       id="school"
                       className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
                       name="school"
+                      required
                     >
                       <option>Select school</option>
                       {schools.map(school => {
@@ -112,6 +117,7 @@ export default function CreateResourcePage() {
                   </div>
                   <div className="mt-4">
                     <input
+                      required
                       type="file"
                       id="resource-image"
                       className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"

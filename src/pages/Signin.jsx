@@ -63,6 +63,7 @@ const Signin = () => {
                   Email or Username
                 </label>
                 <input
+                  required
                   ref={emailOrUsernameRef}
                   id="emailOrUsername"
                   name="emailOrUsername"
@@ -76,6 +77,7 @@ const Signin = () => {
                   Password
                 </label>
                 <input
+                  required
                   ref={passwordRef}
                   name="password"
                   id="password"

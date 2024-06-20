@@ -152,12 +152,12 @@ export class ResourcesController {
       ? updatedImages.at(-1).pageNo + 1
       : 1;
     for (const image of images) {
-      const { url } = await this.resourcesService.uploadResourceImage({
+      const { secure_url } = await this.resourcesService.uploadResourceImage({
         file: image,
         resource,
         pageNo,
       });
-      updatedImages.push({ pageNo, url });
+      updatedImages.push({ pageNo, url: secure_url });
       pageNo++;
     }
     resource.images = updatedImages;

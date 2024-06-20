@@ -7,7 +7,6 @@ export default function Header({ view = headerViews.Home }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const navigation = useNavigation();
-  console.log(navigation);
 
   const homeBtnView = (
     <>

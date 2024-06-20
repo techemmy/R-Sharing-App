@@ -1,38 +1,12 @@
 import { useLoaderData } from "react-router"
 import Header from "../components/Header";
 import { headerViews } from "../constants";
+import ResourceImageCard from "../components/ResourceImageCard"
 
 export default function ViewResourcePage() {
-  const { data: { data: { data } } } = useLoaderData()
-  const imagesCards = data.images.map(image => {
-    return (
-      <div key={image.id} className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">
-        <img src={image.url} alt="Resource Image 1" className="w-full h-auto object-cover" />
-        <a
-          type="button"
-          className="absolute bottom-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-          href={image?.url}
-          download={`${data.courseName} - ${data.courseType}`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            />
-          </svg>
-          <span className="sr-only">Download</span>
-        </a>
-      </div>
-    )
-  })
+  const { data: { data: { data: resource } } } = useLoaderData()
+
+  const imagesCards = resource.images.map((image) => <ResourceImageCard key={`image-${image.pageNo}`} image={image} imageDownloadFilename={`${resource.courseName}-${resource.resourceType}-${image.pageNo}`} />)
   return (
     <div className="w-full bg-indigo-50">
       <Header view={headerViews.CreateResource} />
@@ -41,8 +15,8 @@ export default function ViewResourcePage() {
           <div className="p-8 md:p-10">
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold">{data.courseName}</h2>
-                <p className="text-gray-500">{data.resourceType}. {data.resourceYear}.</p>
+                <h2 className="text-2xl font-bold">{resource.courseName}</h2>
+                <p className="text-gray-500">{resource.resourceType}. {resource.resourceYear}.</p>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
@@ -52,8 +26,8 @@ export default function ViewResourcePage() {
                   <div className="mt-2">
                     <div className="relative">
                       <div className="flex items-center justify-between">
-                        <span>{data.resourceType}</span>
-                        {/*<span className="text-gray-500">PQ</span> */}
+                        <span>{resource.resourceType}</span>
+                        <span className="text-gray-500">PQ</span>
                       </div>
                     </div>
                   </div>
@@ -64,7 +38,7 @@ export default function ViewResourcePage() {
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{data.resourceYear}</span>
+                      <span>{resource.resourceYear}</span>
                     </div>
                   </div>
                 </div>
@@ -76,7 +50,7 @@ export default function ViewResourcePage() {
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{data.courseName}</span>
+                      <span>{resource.courseName}</span>
                     </div>
                   </div>
                 </div>
@@ -86,7 +60,7 @@ export default function ViewResourcePage() {
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{data.courseCode}</span>
+                      <span>{resource.courseCode}</span>
                     </div>
                   </div>
                 </div>
@@ -97,7 +71,7 @@ export default function ViewResourcePage() {
                 </label>
                 <div className="mt-2">
                   <div className="flex items-center justify-between">
-                    <span>{data.school.name}</span>
+                    <span>{resource.school.name}</span>
                   </div>
                 </div>
               </div>
@@ -131,8 +105,7 @@ export default function ViewResourcePage() {
                     </button>
                   </div>
                   <div className="mt-4 flex gap-4 overflow-x-auto">
-                    {data.images.length <= 0 ? "No Images" : imagesCards}
-
+                    {resource.images.length <= 0 ? "No Images" : imagesCards}
                   </div>
                 </div>
               </div>
@@ -157,7 +130,7 @@ export default function ViewResourcePage() {
                   </svg>
                   <span className="sr-only">Like</span>
                 </button>
-                <div className="text-gray-500">{data.stars.length} likes</div>
+                <div className="text-gray-500">{resource.stars.length} likes</div>
               </div>
               <div className="bg-gray-50 rounded-lg shadow-lg">
                 <div className="p-8 md:p-10">

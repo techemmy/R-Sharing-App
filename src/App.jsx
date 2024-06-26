@@ -13,7 +13,6 @@ import AuthProvider, { ProtectedRoute, } from './provider/authProvider'
 import { createResourceAction, createResoureceLoader, viewResourceLoader } from "./loadersAndAction";
 import ErrorPage from './pages/ErrorPage'
 import ViewResourcePage from "./pages/ViewResourcePage";
-import api from "./api";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +21,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />} >
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/create-resource" loader={createResoureceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
-        <Route path='/view-resource/:resourceId' loader={viewResourceLoader(api)} element={<ViewResourcePage />}></Route>
+        <Route path='/view-resource/:resourceId' loader={viewResourceLoader} element={<ViewResourcePage />}></Route>
       </Route>
       <Route path="/login" element={<Signin />}></Route>
       <Route path="/signup" element={<Registration />}></Route>
@@ -32,7 +31,7 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <AuthProvider apiClient={api}>
+    <AuthProvider>
       <RouterProvider router={router} />;
 
     </AuthProvider>
@@ -40,26 +39,4 @@ const App = () => {
 };
 
 export default App;
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
-// <Router>
-//         <Sidebar />
-//         <>
-//           <Route path="/feed" element={<HomePage />} />
-
-//           <Route path="/resource-details" element={<ViewResourcePage />} />
-
-//           <Route path="/signin" element={<Signin />} />
-//           <Route path="/signup" element={<Registration />} />
-//         </>
-//       </Router>

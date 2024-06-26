@@ -1,4 +1,3 @@
-import images from "../assets/assets";
 import { useAuth } from "../provider/authProvider";
 import { useRef, useState } from "react";
 import api from "../api";
@@ -46,7 +45,7 @@ const Signin = () => {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-950">
       <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full">
         <div className="hidden md:block">
-          <img src={images.signinImage} alt="Log In" width={800} height={800} className="h-full w-full object-cover" />
+          <img src="/auth.jpg" alt="Log In" width={800} height={800} className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-col items-center justify-center p-4 md:p-6">
           <div className="w-full max-w-md space-y-4">
@@ -63,7 +62,6 @@ const Signin = () => {
                   Email or Username
                 </label>
                 <input
-                  required
                   ref={emailOrUsernameRef}
                   id="emailOrUsername"
                   name="emailOrUsername"
@@ -77,7 +75,6 @@ const Signin = () => {
                   Password
                 </label>
                 <input
-                  required
                   ref={passwordRef}
                   name="password"
                   id="password"

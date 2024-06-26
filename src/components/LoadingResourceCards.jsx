@@ -1,4 +1,3 @@
-import images from "../assets/assets";
 import Card from "./Card";
 
 
@@ -7,7 +6,7 @@ export default function LoadingResourceCards() {
   for (let i = 0; i < Array(2).length; i++) {
     resources.push({
       _id: `loading-${i}`,
-      images: [images.Search],
+      images: ["../assets/Folder.png"],
       resourceType: "Loading...",
       resourceYear: 0,
       courseName: "Loading...",

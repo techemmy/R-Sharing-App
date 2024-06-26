@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import api from "../api/index";
 import { decodeToken, useJwt } from "react-jwt";
 
 const AuthContext = createContext();
 
-const AuthProvider = ({ apiClient, children }) => {
+const AuthProvider = ({ children }) => {
   const [token, setToken_] = useState(() => {
     const cookie = document.cookie.split(";").filter(key => key.startsWith("token"))
     return cookie[0]?.split("=")[1]

@@ -1,17 +1,15 @@
 import { redirect } from "react-router-dom";
 import api from "./api";
 
-export const viewResourceLoader =
-  (apiClient) =>
-  async ({ params }) => {
-    try {
-      const data = await apiClient.get(`/resources/${params.resourceId}`);
-      return { data };
-    } catch (error) {
-      alert(`An error occured: ${error.message}`);
-      return redirect("/home");
-    }
-  };
+export const viewResourceLoader = async function ({ params }) {
+  try {
+    const data = await api.get(`/resources/${params.resourceId}`);
+    return { data };
+  } catch (error) {
+    alert(`An error occured: ${error.message}`);
+    return redirect("/home");
+  }
+};
 
 export async function createResoureceLoader() {
   try {

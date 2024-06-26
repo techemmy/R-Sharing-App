@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import images from "../assets/assets";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api"
 import Logo from "../components/Logo";
@@ -46,7 +45,7 @@ const Registration = () => {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-950">
       <div className="grid grid-cols-1 md:grid-cols-2 w-full h-full">
         <div className="hidden md:block">
-          <img src={images.signinImage} alt="Register" width={800} height={800} className="h-full w-full object-cover" />
+          <img src="/auth.jpg" alt="Register" width={800} height={800} className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-col items-center justify-center p-4 md:p-6">
           <div className="w-full max-w-md space-y-4">
@@ -63,13 +62,13 @@ const Registration = () => {
                   Username
                 </label>
                 <input
-                  required
                   ref={usernameInputRef}
                   id="username"
                   name="username"
                   type="text"
                   placeholder="Enter your username"
                   className="py-2 px-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
                 />
               </div>
               <div>
@@ -77,13 +76,13 @@ const Registration = () => {
                   Email
                 </label>
                 <input
-                  required
                   ref={emailInputRef}
                   name="email"
                   id="email"
                   type="email"
                   placeholder="Enter your email"
                   className="mt-1 py-2 px-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
                 />
               </div>
               <div>
@@ -91,13 +90,13 @@ const Registration = () => {
                   Password
                 </label>
                 <input
-                  required
                   ref={passwordInputRef}
                   name="password"
                   id="password"
                   type="password"
                   placeholder="Enter your password"
                   className="mt-1 py-2 px-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  required
                 />
               </div>
               <button
@@ -132,3 +131,41 @@ const Registration = () => {
 };
 
 export default Registration;
+
+//
+//
+//
+//
+//
+//
+//
+
+// <label htmlFor="full name">Full Name:</label>
+// <input
+//   type="text"
+//   id="fullname"
+//   name="fullName"
+//   value={formData.fullName}
+//   onChange={handleChange}
+//   placeholder="Abhinav Bisht"
+// />
+
+// <label htmlFor="email">Email:</label>
+// <input
+// type="email"
+// id="email"
+// name="email"
+//   value={formData.email}
+//   onChange={handleChange}
+//   placeholder="Bishtabhi02@gmail.com"
+// />
+
+// <label htmlFor="password">Password: </label>
+// <input
+// type="password"
+// id="password"
+// name="password"
+//   value={formData.password}
+//   onChange={handleChange}
+//   placeholder="***********"
+// />

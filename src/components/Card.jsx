@@ -4,7 +4,7 @@ export default function Card({ resource }) {
       key={resource._id}
       className="bg-white rounded-lg shadow-sm flex items-start gap-4 p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
     >
-      <img src={resource.images[0] ? resource.images[0]?.url : "../assets/Folder.png"} alt={resource.courseName} className="rounded-lg w-20 h-20 object-cover" />
+      <img src={resource.images[0] ? resource.images[0]?.url : "/Folder.png"} alt={resource.courseName} className="rounded-lg w-20 h-20 object-cover" />
       <div className="flex-1 space-y-2 h-full flex flex-col justify-between">
         <div className="flex items-center justify-between">
           <div>

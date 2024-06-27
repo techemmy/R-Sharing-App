@@ -6,7 +6,7 @@ export default function LoadingResourceCards() {
   for (let i = 0; i < Array(2).length; i++) {
     resources.push({
       _id: `loading-${i}`,
-      images: ["../assets/Folder.png"],
+      images: ["/Folder.png"],
       resourceType: "Loading...",
       resourceYear: 0,
       courseName: "Loading...",

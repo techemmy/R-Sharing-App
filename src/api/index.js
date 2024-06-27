@@ -11,19 +11,19 @@ const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (response) => {
-    if (response?.data && response.data?.statusCode === 401) {
-      // document.cookie = "token=";
-      // document.location.assign("/login");
-    }
-    return response;
-  },
+  (response) => response,
   (error) => {
-    if (error?.response?.status === 401) {
-      // document.cookie = "token=";
-      // document.location.assign("/login");
+    if (error.response.status === 401) {
+      document.cookie = "token=";
+      document.location.assign("/login");
+      return;
     }
-    return error;
+
+    if (error?.code === "NETWORK_ERR") {
+      console.log("Something went wrong");
+    }
+    return Promise.reject(error);
   },
 );
+
 export default api;

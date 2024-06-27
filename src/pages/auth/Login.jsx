@@ -1,15 +1,14 @@
-import { useAuth } from "../provider/authProvider";
+import { useAuth } from "../../provider/authProvider";
 import { useRef, useState } from "react";
-import api from "../api";
-import Logo from "../components/Logo";
+import Logo from "../../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signin = () => {
-  const { logIn } = useAuth();
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false)
   const emailOrUsernameRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,22 +22,13 @@ const Signin = () => {
     }
 
     try {
-      const resp = await api.post('/auth/login', { emailOrUsername, password })
+      await login({ emailOrUsername, password })
       setLoading(false)
-      if (resp.status === 200) {
-        logIn(resp.data.access_token)
-        alert('Login successful!')
-        return navigate('/home')
-      }
-      alert(resp.response.data.message);
-      return
+      alert("Login successful")
+      navigate('/home')
     } catch (error) {
       setLoading(false)
-      const { response: { data } } = error;
-      alert(data.message)
-      console.log("Error Type:", data.error)
-      console.log("Error Message:", data.message)
-      console.log("Error Status:", data.statusCode)
+      alert(error?.response?.data?.message || error?.message || 'Something went wrong')
     }
   }
   return (

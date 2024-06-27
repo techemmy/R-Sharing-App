@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import api from "../api"
-import Logo from "../components/Logo";
+import * as auth from "../../api/auth";
+import Logo from "../../components/Logo";
 
 const Registration = () => {
   const [loading, setLoading] = useState(false)
@@ -23,20 +23,13 @@ const Registration = () => {
     }
 
     try {
-      const resp = await api.post('/auth/register', { username, email, password });
+      await auth.register({ username, email, password })
       setLoading(false)
-      if (resp.status === 201) {
-        alert('Signup successful!')
-        return navigate('/login')
-      }
-      alert(resp?.response?.data?.message)
+      alert('Signup successful!')
+      return navigate('/login')
     } catch (error) {
       setLoading(false)
-      const { response: { data } } = error;
-      alert(data.message)
-      console.log("Error Type:", data.error)
-      console.log("Error Message:", data.message)
-      console.log("Error Status:", data.statusCode)
+      alert(error?.response?.data?.message || error?.message || 'Something went wrong')
     }
 
   };
@@ -68,7 +61,6 @@ const Registration = () => {
                   type="text"
                   placeholder="Enter your username"
                   className="py-2 px-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
                 />
               </div>
               <div>
@@ -82,7 +74,6 @@ const Registration = () => {
                   type="email"
                   placeholder="Enter your email"
                   className="mt-1 py-2 px-4 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
                 />
               </div>
               <div>
@@ -96,7 +87,6 @@ const Registration = () => {
                   type="password"
                   placeholder="Enter your password"
                   className="mt-1 py-2 px-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  required
                 />
               </div>
               <button

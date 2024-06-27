@@ -1,30 +1,17 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import api from "../api/index";
 import { decodeToken, useJwt } from "react-jwt";
+import * as auth from '../api/auth'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken_] = useState(() => {
+  const [token, setToken] = useState(() => {
     const cookie = document.cookie.split(";").filter(key => key.startsWith("token"))
     return cookie[0]?.split("=")[1]
   });
   const { isExpired, reEvaluateToken } = useJwt(token);
-  const accessTokenRef = useRef(document.cookie.split(";").filter(key => key.startsWith("token"))[1]);
-
-  const logOut = () => {
-    setToken_(null);
-    return <Navigate to="/" replace={true} />;
-  };
-
-  const logIn = (token) => {
-    reEvaluateToken(token);
-    setToken_(token);
-    accessTokenRef.current = token;
-    document.cookie = `token=${token}`
-    return <Navigate to="/home" />
-  }
 
   useEffect(() => {
     if (token) {
@@ -35,12 +22,31 @@ const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
+  function updateToken(token) {
+    setToken(token);
+    reEvaluateToken(token);
+  }
+
+  function logout() {
+    updateToken(null)
+    return <Navigate to="/" replace={true} />;
+  };
+
+  async function login(userData) {
+    const { data, status } = await auth.logIn(userData);
+    if (status !== 200 || !data.access_token) {
+      throw new Error('Something went wrong');
+    }
+    updateToken(data.access_token)
+    return
+  }
+
   const contextValue = {
+    user: decodeToken(token),
     token,
     isExpired,
-    user: decodeToken(token),
-    logIn,
-    logOut
+    login,
+    logout
   }
 
   return (
@@ -49,13 +55,17 @@ const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth hook should be within the <AuthProvider />')
+  }
+  return context;
 };
 
 export const ProtectedRoute = () => {
-  const { token, isExpired } = useAuth();
+  const { user, token, isExpired } = useAuth();
 
-  if (!token || isExpired) {
+  if (!user || isExpired) {
     return <Navigate to="/login" />;
   }
 

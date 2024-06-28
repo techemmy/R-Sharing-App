@@ -1,5 +1,5 @@
-import Login from "./pages/auth/Login";
-import Registration from "./pages/auth/Register";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 import HomePage from "./pages/Homepage";
 import {
   Route,

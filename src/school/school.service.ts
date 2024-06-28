@@ -9,7 +9,7 @@ import { School, SchoolDocument } from './schemas/school.schema';
 export class SchoolService {
   constructor(@InjectModel(School.name) private schoolModel: Model<School>) {}
 
-  async create(createSchoolDto: CreateSchoolDto): Promise<SchoolDocument> {
+  async addSchool(createSchoolDto: CreateSchoolDto): Promise<SchoolDocument> {
     const { name, acronym } = createSchoolDto;
     const schoolNameExists = await this.findByName(name);
     const schoolAcronymExists = await this.findByAcronym(acronym);
@@ -20,6 +20,24 @@ export class SchoolService {
       throw new BadRequestException('School acronym already exists');
     }
     return this.schoolModel.create(createSchoolDto);
+  }
+
+  async addMultipleSchools(
+    createSchoolsDto: CreateSchoolDto[],
+  ): Promise<SchoolDocument[]> {
+    const schools = [] as SchoolDocument[];
+
+    for (const school of createSchoolsDto) {
+      const schoolExists = await this.schoolModel.findOne({
+        $or: [{ name: school.name }, { acronym: school.acronym }],
+      });
+      if (!schoolExists) {
+        const newSchool = await this.addSchool(school);
+        schools.push(newSchool);
+      }
+    }
+
+    return schools;
   }
 
   findAll(): Promise<SchoolDocument[] | null> {

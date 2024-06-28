@@ -9,6 +9,7 @@ import {
   NotFoundException,
   BadRequestException,
   HttpCode,
+  ParseArrayPipe,
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
@@ -19,9 +20,26 @@ export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
   @Post()
-  async create(@Body() createSchoolDto: CreateSchoolDto) {
-    const newSchool = await this.schoolService.create(createSchoolDto);
+  async addSchool(
+    @Body()
+    createSchoolDto: CreateSchoolDto,
+  ) {
+    const newSchool = await this.schoolService.addSchool(createSchoolDto);
     return { data: newSchool, message: 'School created successfully' };
+  }
+
+  @Post('/multiple')
+  async addSchools(
+    @Body('schools', new ParseArrayPipe({ items: CreateSchoolDto }))
+    createSchoolDtos: CreateSchoolDto[],
+  ) {
+    const schools = await this.schoolService.addMultipleSchools(
+      createSchoolDtos,
+    );
+    return {
+      data: schools,
+      message: 'Schools created successfully. Duplicates removed',
+    };
   }
 
   @Get()

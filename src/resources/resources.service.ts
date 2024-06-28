@@ -60,7 +60,7 @@ export class ResourcesService {
       resourceQuery = resourceQuery.where({ resourceType });
     }
 
-    return resourceQuery.limit(limit).skip(offset);
+    return resourceQuery.limit(limit).skip(offset).sort({ createdAt: -1 });
   }
 
   countAll() {

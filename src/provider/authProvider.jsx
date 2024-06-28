@@ -3,22 +3,21 @@ import { Navigate, Outlet } from "react-router-dom";
 import api from "../api/index";
 import { decodeToken, useJwt } from "react-jwt";
 import * as auth from '../api/auth'
+import CookieHelper from '../utils/cookieHelper'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(() => {
-    const cookie = document.cookie.split(";").filter(key => key.startsWith("token"))
-    return cookie[0]?.split("=")[1]
-  });
+  const [token, setToken] = useState(() => CookieHelper.getCookie('token'));
   const { isExpired, reEvaluateToken } = useJwt(token);
+  const user = decodeToken(token);
 
   useEffect(() => {
     if (token) {
-      document.cookie = `token=${token}`
+      CookieHelper.setCookie('token', token, { expires: Date(user?.exp) })
     } else {
       delete api.defaults.headers.common["Authorization"];
-      document.cookie = `token=`;
+      CookieHelper.deleteCookie('token')
     }
   }, [token]);
 
@@ -42,7 +41,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const contextValue = {
-    user: decodeToken(token),
+    user,
     token,
     isExpired,
     login,

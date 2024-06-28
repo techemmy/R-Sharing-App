@@ -41,7 +41,7 @@ export class SchoolService {
   }
 
   findAll(): Promise<SchoolDocument[] | null> {
-    return this.schoolModel.find({});
+    return this.schoolModel.find({}).sort({ name: 1 });
   }
 
   findById(id: string): Promise<SchoolDocument | null> {

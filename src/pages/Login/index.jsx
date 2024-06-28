@@ -1,5 +1,4 @@
 import { useAuth } from "../../provider/authProvider";
-import { useRef, useState } from "react";
 import Logo from "../../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
@@ -9,7 +8,7 @@ export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate()
 
-  const onFormSubmit = async (userData) => {
+  const handleSubmit = async (userData) => {
     try {
       await login(userData)
       alert("Login successful")
@@ -35,7 +34,7 @@ export default function Login() {
               <p className="text-gray-500">A journey of a million mile begins with a single step</p>
             </div>
 
-            <LoginForm handleSubmit={onFormSubmit} />
+            <LoginForm handleSubmit={handleSubmit} />
 
             <div className="text-center text-gray-500">
               Yet to create an account?

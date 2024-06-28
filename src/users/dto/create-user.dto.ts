@@ -5,9 +5,11 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  MinLength,
 } from 'class-validator';
 
 export class CreateUserDto {
+  @MinLength(5)
   @IsString()
   @IsNotEmpty()
   @Transform(({ value }) => value.toLowerCase().replaceAll(' ', '_'))

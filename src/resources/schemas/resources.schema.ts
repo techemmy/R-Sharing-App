@@ -9,7 +9,7 @@ export interface Image {
   url: string;
 }
 
-@Schema()
+@Schema({ timestamps: true })
 export class Resources {
   @Prop({ required: true, enum: ResourceType })
   resourceType: string;

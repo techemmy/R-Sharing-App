@@ -3,7 +3,7 @@ import mongoose, { HydratedDocument } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { School } from 'src/school/schemas/school.schema';
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
   @Prop({ required: true, unique: true })
   username: string;
@@ -14,7 +14,7 @@ export class User {
   @Prop({
     type: mongoose.Schema.Types.ObjectId,
     ref: School.name,
-    default: null
+    default: null,
   })
   school: School;
 

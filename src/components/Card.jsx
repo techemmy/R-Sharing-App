@@ -32,7 +32,7 @@ export default function Card({ resource }) {
           <UserIcon className="w-4 h-4 text-indigo-500" />
           <span>{resource.creator.username}</span>
           <span>·</span>
-          <span className="bg-gray-100 text-indigo-400 font-medium py-1 px-2 rounded-full">{resource.resourceType}</span>
+          <span className="bg-gray-100 text-gray-400 font-medium py-1 px-2 rounded-full">{resource.resourceType}</span>
           <span>·</span>
           <span>{resource.school.acronym}</span>
         </div>

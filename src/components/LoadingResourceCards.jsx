@@ -1,9 +1,9 @@
+import ContentLoader from "react-content-loader";
 import Card from "./Card";
 
-
-export default function LoadingResourceCards() {
+export default function LoadingResourceCards(props) {
   const resources = [];
-  for (let i = 0; i < Array(2).length; i++) {
+  for (let i = 0; i < Array(4).length; i++) {
     resources.push({
       _id: `loading-${i}`,
       images: ["/Folder.png"],
@@ -23,11 +23,14 @@ export default function LoadingResourceCards() {
   }
   const resourceCards = resources.map((resource) => {
     return (
-      <Card
-        key={`${resource._id}-${resource.courseName}`}
-        resource={resource}
-      />
+      <ContentLoader key={`${resource._id}`} viewBox="0 0 300 150" height={150} width={300} {...props}>
+        <circle cx="70.2" cy="73.2" r="41.3" />
+        <rect x="129.9" y="29.5" width="125.5" height="17" />
+        <rect x="129.9" y="64.7" width="296" height="17" />
+        <rect x="129.9" y="97.8" width="253.5" height="17" />
+        <rect x="129.9" y="132.3" width="212.5" height="17" />
+      </ContentLoader>
     )
   })
   return resourceCards
-};
+}

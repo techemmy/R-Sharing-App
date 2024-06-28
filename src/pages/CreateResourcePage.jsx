@@ -99,7 +99,7 @@ export default function CreateResourcePage() {
                     >
                       <option>Select school</option>
                       {schools.map(school => {
-                        return <option key={`${school._id}`} value={school._id}>{school.name}</option>
+                        return <option key={`${school._id}`} value={school._id}>{school.name} ({school.acronym})</option>
                       })}
 
                     </select>

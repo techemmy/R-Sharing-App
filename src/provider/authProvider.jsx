@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import api from "../api/index";
 import { decodeToken, useJwt } from "react-jwt";
 import * as auth from '../api/auth'
@@ -59,17 +59,6 @@ export const useAuth = () => {
     throw new Error('useAuth hook should be within the <AuthProvider />')
   }
   return context;
-};
-
-export const ProtectedRoute = () => {
-  const { user, token, isExpired } = useAuth();
-
-  if (!user || isExpired) {
-    return <Navigate to="/login" />;
-  }
-
-  api.defaults.headers.common["Authorization"] = "Bearer " + token;
-  return <Outlet />;
 };
 
 export default AuthProvider;

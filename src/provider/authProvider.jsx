@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import api from "../api/index";
 import { decodeToken, useJwt } from "react-jwt";
@@ -7,7 +7,7 @@ import CookieHelper from '../utils/cookieHelper'
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+export default function AuthProvider({ children }) {
   const [token, setToken] = useState(() => CookieHelper.getCookie('token'));
   const { isExpired, reEvaluateToken } = useJwt(token);
   const user = decodeToken(token);
@@ -53,5 +53,3 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-
-export default AuthProvider;

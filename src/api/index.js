@@ -1,4 +1,5 @@
 import axios from "axios";
+import CookieHelper from "../utils/cookieHelper";
 const env = import.meta.env;
 
 const API_V1_URL = env.VITE_API_V1_URL;
@@ -13,10 +14,8 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error);
     if (error?.response?.status === 401) {
-      document.cookie = "token=";
-      document.location.assign("/login");
+      CookieHelper.deleteCookie("token");
       return;
     }
 

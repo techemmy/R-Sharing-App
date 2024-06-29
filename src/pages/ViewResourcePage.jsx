@@ -11,7 +11,7 @@ export default function ViewResourcePage() {
   useEffect(() => {
     getCourseById(resourceId).then(course => {
       setCourse(course)
-    }).catch(console.log)
+    })
   }, [resourceId])
 
 

@@ -1,62 +1,28 @@
 import Sidebar from "../components/Sidebar";
-import { useEffect, useState } from "react";
-import api from "../api/"
+import { useState } from "react";
 import Header from "../components/Header"
 import SearchInput from "../components/SearchInput"
 import { RESOURCE_TYPE } from "../constants"
 import LoadingResourceCards from "../components/LoadingResourceCards"
 import ResourceCards from "../components/ResourceCards";
-
-const possibleStatus = {
-  idle: 'idle',
-  pending: 'pending',
-  resolved: 'resolved',
-  rejected: 'rejected',
-}
+import useGetAsync from "../hooks/useGetAsyncHook";
 
 export default function HomePage() {
-  const [status, setStatus] = useState(possibleStatus.idle)
   const [filter, setFilter] = useState(RESOURCE_TYPE.All);
-  const [resources, setResources] = useState([])
-
-  useEffect(() => {
-    setStatus(possibleStatus.pending);
-    api.get('/resources?size=100', {
-      params: { type: filter }
-    }
-    ).then(resp => {
-      if (resp.status === 200) {
-        setStatus(possibleStatus.resolved)
-        setResources(resp.data.data)
-      } else {
-        throw new Error(resp?.response?.data?.message)
-      }
-    }).catch(error => {
-      setStatus(possibleStatus.rejected)
-    })
-  }, [filter])
+  const { data, isLoading, error } = useGetAsync(`/resources?size=100&type=${filter}`)
+  const resources = data?.data?.data;
 
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
   }
 
   let response;
-  switch (status) {
-    case possibleStatus.idle:
-      response = <LoadingResourceCards />
-      break;
-    case possibleStatus.pending:
-      response = <LoadingResourceCards />;
-      break
-    case possibleStatus.resolved:
-      response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p>{resources.length} resources found</p>;
-      break
-    case possibleStatus.rejected:
-      response = <p>Something went wrong</p>
-      break
-    default:
-      response = <p>Check your internet connection and refresh.\n You're disconnected from the server</p>
-      break;
+  if (isLoading) {
+    response = <LoadingResourceCards />
+  } else if (resources) {
+    response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p>{resources.length} resources found</p>;
+  } else if (error) {
+    response = <p>Something went wrong {error?.response?.data?.message}</p>
   }
 
   return (

@@ -15,6 +15,7 @@ export default function useGetAsync(url) {
       console.log('useAsync Err:', err)
       setIsLoading(false);
       setError(err)
+      alert(err?.response?.data?.message || err.message || 'Something unexpected happened')
     })
   }, [url])
 

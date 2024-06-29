@@ -13,14 +13,16 @@ const api = axios.create({
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response.status === 401) {
+    console.log(error);
+    if (error?.response?.status === 401) {
       document.cookie = "token=";
       document.location.assign("/login");
       return;
     }
 
-    if (error?.code === "NETWORK_ERR") {
+    if (error?.code === "ERR_NETWORK") {
       console.log("Something went wrong");
+      alert("Check your internet connection");
     }
     return Promise.reject(error);
   },

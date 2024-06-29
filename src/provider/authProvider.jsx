@@ -5,7 +5,7 @@ import { decodeToken, useJwt } from "react-jwt";
 import * as auth from '../api/auth'
 import CookieHelper from '../utils/cookieHelper'
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => CookieHelper.getCookie('token'));
@@ -53,12 +53,5 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth hook should be within the <AuthProvider />')
-  }
-  return context;
-};
 
 export default AuthProvider;

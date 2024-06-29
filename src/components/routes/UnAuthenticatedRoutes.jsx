@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import { useAuth } from "../../provider/authProvider";
+import useAuth from "../../hooks/useAuth";
 
 export default function UnAuthenticatedRoutes() {
   const { token, user } = useAuth();

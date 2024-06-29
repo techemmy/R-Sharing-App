@@ -1,6 +1,6 @@
 import { useNavigate, Link, useNavigation } from "react-router-dom";
 import { headerViews } from "../constants";
-import { useAuth } from "../provider/authProvider"
+import useAuth from "../hooks/useAuth"
 import Logo from './Logo'
 
 export default function Header({ view = headerViews.Home }) {

@@ -1,7 +1,7 @@
 import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import Header from "../components/Header";
 import { headerViews } from "../constants";
-import { useAuth } from "../provider/authProvider";
+import useAuth from "../hooks/useAuth";
 
 export default function CreateResourcePage() {
   const { data: { data: { data: schools } } } = useLoaderData();

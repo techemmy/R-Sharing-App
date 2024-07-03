@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import { headerViews } from "../constants";
 import { getCourseById } from "../api/courses";
 import { useEffect, useState } from "react";
+import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import CourseImageCard from "@/components/CourseImageCard";
 
 export default function ViewResourcePage() {
   const { resourceId } = useParams();
@@ -15,32 +17,8 @@ export default function ViewResourcePage() {
   }, [resourceId])
 
 
-  const imagesCards = course?.images?.map(image => {
-    return (
-      <div key={image.id} className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative">
-        <img src={image.url} alt="Resource Image 1" className="w-full h-auto object-cover" />
-        <button
-          type="button"
-          className="absolute bottom-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            />
-          </svg>
-          <span className="sr-only">Download</span>
-        </button>
-      </div>
-    )
+  const courseImages = course?.images?.map(image => {
+    return <CourseImageCard key={image.pageNo} image={image} courseInfo={`${course.courseName}-${course.resourceType}`} />
   })
 
   return (
@@ -140,9 +118,18 @@ export default function ViewResourcePage() {
                       Download as PDF (Coming Soon)
                     </button>
                   </div>
-                  <div className="mt-4 flex gap-4 overflow-x-auto">
-                    {course?.images?.length <= 0 ? "No Images" : imagesCards}
-
+                  <div className="mt-4">
+                    {course?.images?.length <= 0
+                      ? "No Images"
+                      :
+                      <Carousel className="w-full">
+                        <CarouselContent>
+                          {courseImages}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </Carousel>
+                    }
                   </div>
                 </div>
               </div>

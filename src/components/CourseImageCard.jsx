@@ -1,3 +1,5 @@
+import { CarouselItem } from "@/components/ui/carousel";
+
 async function downloadImage(imageSrc, imageName) {
   const image = await fetch(imageSrc)
   const imageBlog = await image.blob()
@@ -11,17 +13,17 @@ async function downloadImage(imageSrc, imageName) {
   document.body.removeChild(link)
 }
 
-export default function ResourceImageCard({
+export default function CourseImageCard({
   image,
-  imageDownloadFilename,
+  courseInfo,
 
 }) {
   return (
-    <div className="w-[200px] h-auto rounded-lg overflow-hidden shrink-0 relative" >
-      <img src={image.url} alt="Resource Image 1" className="w-full h-auto object-cover" />
+    <CarouselItem className="relative">
+      <img src={image.url} alt={`${courseInfo} page - ${image.pageNo}`} className="object-cover w-full h-auto rounded-lg" />
       <button
         onClick={() => {
-          downloadImage(image.url, imageDownloadFilename)
+          downloadImage(image.url, `${courseInfo}-${image.pageNo}`)
         }}
         className="absolute bottom-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
       >
@@ -41,6 +43,6 @@ export default function ResourceImageCard({
         </svg>
         <span className="sr-only">Download</span>
       </button>
-    </div >
+    </CarouselItem>
   )
 }

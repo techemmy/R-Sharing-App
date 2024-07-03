@@ -91,14 +91,14 @@ export default function ViewResourcePage() {
               </div>
               <div className="bg-gray-50 rounded-lg shadow-lg">
                 <div className="p-8 md:p-10">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-wrap items-center justify-between">
                     <div>
                       <h3 className="text-lg font-medium">Resource Images</h3>
                       <p className="text-gray-500">View the images uploaded for this resource.</p>
                     </div>
                     <button
                       type="button"
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-not-allowed"
+                      className="inline-flex items-center mt-2 md:mt-0 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-not-allowed"
                       disabled
                     >
                       <svg

@@ -1,11 +1,11 @@
-import Sidebar from "../components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import { useState } from "react";
-import Header from "../components/Header"
-import SearchInput from "../components/SearchInput"
-import { RESOURCE_TYPE } from "../constants"
-import LoadingResourceCards from "../components/LoadingResourceCards"
-import ResourceCards from "../components/ResourceCards";
-import useGetAsync from "../hooks/useGetAsyncHook";
+import Header from "@/components/Header"
+import SearchInput from "@/components/SearchInput"
+import { RESOURCE_TYPE } from "@/constants"
+import LoadingResourceCards from "@/components/LoadingResourceCards"
+import ResourceCards from "@/components/ResourceCards";
+import useGetAsync from "@/hooks/useGetAsyncHook";
 
 export default function HomePage() {
   const [filter, setFilter] = useState(RESOURCE_TYPE.All);

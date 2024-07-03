@@ -43,6 +43,6 @@ export default function CourseImageCard({
         </svg>
         <span className="sr-only">Download</span>
       </button>
-    </CarouselItem>
+    </CarouselItem >
   )
 }

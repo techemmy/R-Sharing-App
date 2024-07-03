@@ -8,13 +8,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
-      "@pages": resolve(__dirname, "./src/pages"),
-      "@components": resolve(__dirname, "./src/components"),
-      "@lib": resolve(__dirname, "./src/lib"),
-      "@utils": resolve(__dirname, "./src/utils"),
-      "@hooks": resolve(__dirname, "./src/hooks"),
-      "@providers": resolve(__dirname, "./src/provider"),
-      "@api": resolve(__dirname, "./src/api"),
     },
   },
 });

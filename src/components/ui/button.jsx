@@ -38,7 +38,7 @@ const Button = React.forwardRef(({ className, variant, size, asChild = false, is
   const Comp = asChild ? Slot : "button"
   const loader = (
     <>
-      <Loader color={loaderColor} className="mr-2 h-4 w-4 animate-spin" />
+      <Loader className="mr-2 h-4 w-4 animate-spin" />
       Please wait
     </>
   )

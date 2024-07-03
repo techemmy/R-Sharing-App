@@ -1,6 +1,6 @@
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import Button from "../../components/ui/Button";
+import { Button } from "../../components/ui/Button";
 
 const registerValidationSchema = Yup.object({
   username: Yup.string().trim()
@@ -74,7 +74,7 @@ export default function RegistrationForm({ handleSubmit }) {
           <Button
             type="submit"
             disabled={!formik.isValid}
-            isLoading={formik.isSubmitting}
+            isloading={formik.isSubmitting}
             loaderColor="text-white"
             className={`w-full rounded-md bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer ${!formik.isValid && 'cursor-not-allowed'}`}
           >

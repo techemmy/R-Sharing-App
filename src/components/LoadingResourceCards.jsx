@@ -1,5 +1,4 @@
 import ContentLoader from "react-content-loader";
-import Card from "./Card";
 
 export default function LoadingResourceCards(props) {
   const resources = [];

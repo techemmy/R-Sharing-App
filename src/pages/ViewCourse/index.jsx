@@ -1,20 +1,20 @@
 import { useParams } from "react-router"
-import Header from "../components/Header";
-import { headerViews } from "../constants";
-import { getCourseById } from "../api/courses";
+import Header from "@/components/Header";
+import { headerViews } from "@/constants";
+import { getCourseById } from "@/api/courses";
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import CourseImageCard from "@/components/CourseImageCard";
 
 export default function ViewResourcePage() {
-  const { resourceId } = useParams();
+  const { courseId } = useParams();
   const [course, setCourse] = useState([])
 
   useEffect(() => {
-    getCourseById(resourceId).then(course => {
+    getCourseById(courseId).then(course => {
       setCourse(course)
     })
-  }, [resourceId])
+  }, [courseId])
 
 
   const courseImages = course?.images?.map(image => {

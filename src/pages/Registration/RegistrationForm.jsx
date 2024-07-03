@@ -1,6 +1,6 @@
 import { Field, Form, Formik, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import { Button } from "../../components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const registerValidationSchema = Yup.object({
   username: Yup.string().trim()

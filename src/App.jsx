@@ -13,7 +13,7 @@ import AuthProvider from './provider/authProvider'
 import { createResoureceLoader } from "./loaders";
 import { createResourceAction } from "./actions";
 import ErrorPage from './pages/ErrorPage'
-import ViewResourcePage from "./pages/ViewResourcePage";
+import ViewCourse from "@/pages/ViewCourse";
 import ProtectedRoutes from './components/routes/ProtectedRoutes'
 import UnAuthenticatedRoutes from './components/routes/UnAuthenticatedRoutes'
 
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoutes />} >
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/create-resource" loader={createResoureceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
-        <Route path='/view-resource/:resourceId' element={<ViewResourcePage />}></Route>
+        <Route path='/view-course/:courseId' element={<ViewCourse />}></Route>
       </Route>
       <Route element={<UnAuthenticatedRoutes />}>
         <Route path="/login" element={<Login />}></Route>

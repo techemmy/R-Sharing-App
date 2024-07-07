@@ -8,6 +8,7 @@ export default function useGetAsync(url) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
+    setIsLoading(true)
     api.get(url).then(resp => {
       setIsLoading(false)
       setData(resp);

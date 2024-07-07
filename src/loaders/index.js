@@ -1,7 +1,7 @@
 import { redirect } from "react-router-dom";
 import api from "../api";
 
-export async function createResoureceLoader() {
+export async function createResourceLoader() {
   try {
     const data = await api.get("/schools");
     return { data };

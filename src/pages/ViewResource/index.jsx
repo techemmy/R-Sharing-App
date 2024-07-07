@@ -1,24 +1,24 @@
 import { useParams } from "react-router"
 import Header from "@/components/Header";
 import { headerViews } from "@/constants";
-import { getCourseById } from "@/api/courses";
+import { getResourceById } from "@/api/resources";
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import CourseImageCard from "@/components/CourseImageCard";
+import ResourceImageCard from "@/components/ResourceImageCard";
 
 export default function ViewResourcePage() {
-  const { courseId } = useParams();
-  const [course, setCourse] = useState([])
+  const { resourceId } = useParams();
+  const [resource, setResource] = useState([])
 
   useEffect(() => {
-    getCourseById(courseId).then(course => {
-      setCourse(course)
+    getResourceById(resourceId).then(resource => {
+      setResource(resource)
     })
-  }, [courseId])
+  }, [resourceId])
 
 
-  const courseImages = course?.images?.map(image => {
-    return <CourseImageCard key={image.pageNo} image={image} courseInfo={`${course.courseName}-${course.resourceType}`} />
+  const resourceImages = resource?.images?.map(image => {
+    return <ResourceImageCard key={image.pageNo} image={image} resourceInfo={`${resource.courseName}-${resource.resourceType}`} />
   })
 
   return (
@@ -29,8 +29,8 @@ export default function ViewResourcePage() {
           <div className="p-8 md:p-10">
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold">{course?.courseName}</h2>
-                <p className="text-gray-500">{course?.resourceType}. {course?.resourceYear}.</p>
+                <h2 className="text-2xl font-bold">{resource?.courseName}</h2>
+                <p className="text-gray-500">{resource?.resourceType}. {resource?.resourceYear}.</p>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
@@ -40,7 +40,7 @@ export default function ViewResourcePage() {
                   <div className="mt-2">
                     <div className="relative">
                       <div className="flex items-center justify-between">
-                        <span>{course?.resourceType}</span>
+                        <span>{resource?.resourceType}</span>
                         {/*<span className="text-gray-500">PQ</span> */}
                       </div>
                     </div>
@@ -52,29 +52,29 @@ export default function ViewResourcePage() {
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{course?.resourceYear}</span>
+                      <span>{resource?.resourceYear}</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="course-name" className="block text-sm font-medium text-gray-700">
-                    Course Name
+                  <label htmlFor="resource-name" className="block text-sm font-medium text-gray-700">
+                    resource Name
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{course?.courseName}</span>
+                      <span>{resource?.courseName}</span>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="course-code" className="block text-sm font-medium text-gray-700">
-                    Course Code
+                  <label htmlFor="resource-code" className="block text-sm font-medium text-gray-700">
+                    resource Code
                   </label>
                   <div className="mt-2">
                     <div className="flex items-center justify-between">
-                      <span>{course?.courseCode}</span>
+                      <span>{resource?.courseCode}</span>
                     </div>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export default function ViewResourcePage() {
                 </label>
                 <div className="mt-2">
                   <div className="flex items-center justify-between">
-                    <span>{course?.school?.name}</span>
+                    <span>{resource?.school?.name}</span>
                   </div>
                 </div>
               </div>
@@ -119,12 +119,12 @@ export default function ViewResourcePage() {
                     </button>
                   </div>
                   <div className="mt-4">
-                    {course?.images?.length <= 0
+                    {resource?.images?.length <= 0
                       ? "No Images"
                       :
                       <Carousel className="w-full">
                         <CarouselContent>
-                          {courseImages}
+                          {resourceImages}
                         </CarouselContent>
                         <CarouselPrevious />
                         <CarouselNext />
@@ -154,7 +154,7 @@ export default function ViewResourcePage() {
                   </svg>
                   <span className="sr-only">Like</span>
                 </button>
-                <div className="text-gray-500">{course?.stars?.length} likes</div>
+                <div className="text-gray-500">{resource?.stars?.length} likes</div>
               </div>
               <div className="bg-gray-50 rounded-lg shadow-lg">
                 <div className="p-8 md:p-10">

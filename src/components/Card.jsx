@@ -9,8 +9,8 @@ export default function Card({ resource }) {
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold">{resource.courseName}</h3>
-            <p className="text-sm font-bold text-indigo-500">{resource.courseCode}</p>
-            <p className="text-sm text-indigo-500">Slides: {resource.images.length}</p>
+            <p className="text-sm font-medium text-indigo-500">{resource.courseCode}</p>
+            <p className="text-sm text-gray-500">Slides: {resource.images.length}</p>
           </div>
           <div className="flex items-center gap-1">
             <svg
@@ -28,24 +28,11 @@ export default function Card({ resource }) {
             <span className="text-sm font-medium">{resource.stars.length}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-500">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4 fill-indigo-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
-            />
-          </svg>
+        <div className="flex items-center gap-2 text-sm">
+          <UserIcon className="w-4 h-4 text-indigo-500" />
           <span>{resource.creator.username}</span>
           <span>·</span>
-          <span className="bg-indigo-500 text-white p-1 rounded">{resource.resourceType}</span>
+          <span className="bg-gray-100 text-gray-400 font-medium py-1 px-2 rounded-full">{resource.resourceType}</span>
           <span>·</span>
           <span>{resource.school.acronym}</span>
         </div>
@@ -54,3 +41,22 @@ export default function Card({ resource }) {
   );
 };
 
+function UserIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}

@@ -13,17 +13,17 @@ async function downloadImage(imageSrc, imageName) {
   document.body.removeChild(link)
 }
 
-export default function CourseImageCard({
+export default function ResourceImageCard({
   image,
-  courseInfo,
+  resourceInfo,
 
 }) {
   return (
     <CarouselItem className="relative">
-      <img src={image.url} alt={`${courseInfo} page - ${image.pageNo}`} className="object-cover w-full h-auto rounded-lg" />
+      <img src={image.url} alt={`${resourceInfo} page - ${image.pageNo}`} className="object-cover w-full h-auto rounded-lg" />
       <button
         onClick={() => {
-          downloadImage(image.url, `${courseInfo}-${image.pageNo}`)
+          downloadImage(image.url, `${resourceInfo}-${image.pageNo}`)
         }}
         className="absolute bottom-2 right-2 bg-gray-800 text-white rounded-full p-2 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
       >

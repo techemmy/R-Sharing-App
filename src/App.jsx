@@ -10,10 +10,10 @@ import {
 import LandingPage from "./pages/landingPage";
 import CreateResourcePage from "./pages/CreateResourcePage";
 import AuthProvider from './provider/authProvider'
-import { createResoureceLoader } from "./loaders";
+import { createResourceLoader } from "./loaders";
 import { createResourceAction } from "./actions";
 import ErrorPage from './pages/ErrorPage'
-import ViewCourse from "@/pages/ViewCourse";
+import ViewResource from "@/pages/ViewResource";
 import ProtectedRoutes from './components/routes/ProtectedRoutes'
 import UnAuthenticatedRoutes from './components/routes/UnAuthenticatedRoutes'
 
@@ -25,8 +25,8 @@ const router = createBrowserRouter(
       <Route exact path="/" element={<LandingPage />}></Route>
       <Route element={<ProtectedRoutes />} >
         <Route path="/home" element={<HomePage />}></Route>
-        <Route path="/create-resource" loader={createResoureceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
-        <Route path='/view-course/:courseId' element={<ViewCourse />}></Route>
+        <Route path="/create-resource" loader={createResourceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
+        <Route path='/view-resource/:resourceId' element={<ViewResource />}></Route>
       </Route>
       <Route element={<UnAuthenticatedRoutes />}>
         <Route path="/login" element={<Login />}></Route>

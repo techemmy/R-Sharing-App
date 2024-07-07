@@ -1,8 +1,8 @@
 import api from "..";
 
-export const getCourseById = async function (courseId) {
+export const getResourceById = async function (resourceId) {
   try {
-    const response = await api.get(`/resources/${courseId}`);
+    const response = await api.get(`/resources/${resourceId}`);
     return response.data.data;
   } catch (error) {
     console.log("err", error?.response?.data?.message);

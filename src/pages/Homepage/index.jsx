@@ -6,14 +6,25 @@ import { RESOURCE_TYPE } from "@/constants"
 import LoadingResourceCards from "@/components/LoadingResourceCards"
 import ResourceCards from "@/components/ResourceCards";
 import useGetAsync from "@/hooks/useGetAsyncHook";
+import { useSearchParams } from "react-router-dom";
 
 export default function HomePage() {
   const [filter, setFilter] = useState(RESOURCE_TYPE.All);
-  const { data, isLoading, error } = useGetAsync(`/resources?size=100&type=${filter}`)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchTerm = searchParams.get('q') ?? '';
+
+  const { data, isLoading, error } = useGetAsync(
+    `/resources?size=100&type=${filter}&q=${searchTerm}`
+  )
   const resources = data?.data?.data;
 
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
+  }
+
+  const handleSearchSubmit = function(searchWord) {
+    if (searchWord === searchTerm) return
+    setSearchParams({ q: searchWord })
   }
 
   let response;
@@ -32,9 +43,11 @@ export default function HomePage() {
         <Sidebar handleFilterChange={handleResourceTypeChange} />
 
         <div className="grid">
-          <div className="flex flex-wrap gap-2 items-center justify-between h-max">
+          <div className="flex flex-wrap gap-2 mb-5 items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
-            <SearchInput />
+            <SearchInput
+              onSubmit={handleSearchSubmit}
+            />
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
             {response}

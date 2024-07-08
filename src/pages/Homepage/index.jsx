@@ -31,7 +31,7 @@ export default function HomePage() {
   if (isLoading) {
     response = <LoadingResourceCards />
   } else if (resources) {
-    response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p>{resources.length} resources found</p>;
+    response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p className="font-medium mt-5">No resources found</p>;
   } else if (error) {
     response = <p>Something went wrong {error?.response?.data?.message}</p>
   }
@@ -42,7 +42,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 p-4 md:p-6">
         <Sidebar handleFilterChange={handleResourceTypeChange} />
 
-        <div className="grid">
+        <div className="flex flex-col">
           <div className="flex flex-wrap gap-2 mb-5 items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
             <SearchInput

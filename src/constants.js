@@ -4,7 +4,7 @@ export const RESOURCE_TYPE = {
   Notes: "NOTE",
 };
 
-export const headerViews = {
+export const HEADER_VIEWS = {
   Home: "home",
   CreateResource: "create-resource",
 };

@@ -1,9 +1,9 @@
 import { useNavigate, Link, useNavigation } from "react-router-dom";
-import { headerViews } from "../constants";
+import { HEADER_VIEWS } from "../constants";
 import useAuth from "../hooks/useAuth"
 import Logo from './Logo'
 
-export default function Header({ view = headerViews.Home }) {
+export default function Header({ view = HEADER_VIEWS.Home }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const navigation = useNavigation();
@@ -72,11 +72,11 @@ export default function Header({ view = headerViews.Home }) {
 
   let buttonsToShow;
   switch (view) {
-    case headerViews.Home:
+    case HEADER_VIEWS.Home:
       buttonsToShow = homeBtnView;
       break;
 
-    case headerViews.CreateResource:
+    case HEADER_VIEWS.CreateResource:
       buttonsToShow = createResourceBtnView;
       break
 

@@ -1,6 +1,6 @@
 import { useParams } from "react-router"
 import Header from "@/components/Header";
-import { headerViews } from "@/constants";
+import { HEADER_VIEWS } from "@/constants";
 import { getResourceById } from "@/api/resources";
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
@@ -23,7 +23,7 @@ export default function ViewResourcePage() {
 
   return (
     <div className="w-full bg-indigo-50">
-      <Header view={headerViews.CreateResource} />
+      <Header view={HEADER_VIEWS.CreateResource} />
       <div className="container mx-auto py-12">
         <div className="bg-white rounded-lg shadow-lg">
           <div className="p-8 md:p-10">

@@ -1,6 +1,6 @@
 import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import Header from "../components/Header";
-import { headerViews } from "../constants";
+import { HEADER_VIEWS } from "../constants";
 import useAuth from "../hooks/useAuth";
 
 export default function CreateResourcePage() {
@@ -9,7 +9,7 @@ export default function CreateResourcePage() {
   const navigation = useNavigation();
   return (
     <div className="w-full bg-indigo-50">
-      <Header view={headerViews.CreateResource} />
+      <Header view={HEADER_VIEWS.CreateResource} />
       <div className="container mx-auto py-12">
         <Form method="post" encType="multipart/form-data" className="bg-white rounded-lg shadow-lg">
           <input value={creator} name='creator' className="hidden" readOnly />

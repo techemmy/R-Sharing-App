@@ -2,8 +2,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
-export default function SearchInput({ onSubmit }) {
-  const [searchTerm, setSearchTerm] = useState('');
+export default function SearchInput({ onSubmit, urlSearchTerm = '' }) {
+  const [searchTerm, setSearchTerm] = useState(urlSearchTerm);
 
   function handleSubmit(event) {
     event.preventDefault();

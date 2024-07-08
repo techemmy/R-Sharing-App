@@ -46,9 +46,11 @@ export default function HomePage() {
           <div className="flex flex-wrap gap-2 mb-5 items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
             <SearchInput
+              urlSearchTerm={searchTerm}
               onSubmit={handleSearchSubmit}
             />
           </div>
+          {searchTerm && <h2>Search results for "{searchTerm}"</h2>}
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
             {response}
           </div>

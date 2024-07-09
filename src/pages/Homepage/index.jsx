@@ -7,6 +7,15 @@ import LoadingResourceCards from "@/components/LoadingResourceCards"
 import ResourceCards from "@/components/ResourceCards";
 import useGetAsync from "@/hooks/useGetAsyncHook";
 import { useSearchParams } from "react-router-dom";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
 
 export default function HomePage() {
   const [filter, setFilter] = useState(RESOURCE_TYPE.All);
@@ -50,10 +59,29 @@ export default function HomePage() {
               onSubmit={handleSearchSubmit}
             />
           </div>
-          {searchTerm && <h2>Search results for "{searchTerm}"</h2>}
+          <h2>{searchTerm && `Search results for "${searchTerm}"`}</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
             {response}
           </div>
+
+          {resources?.length > 0 &&
+            <Pagination className="mt-2">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          }
         </div>
       </div>
     </>

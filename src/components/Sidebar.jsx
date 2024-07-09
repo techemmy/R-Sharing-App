@@ -1,5 +1,6 @@
 import { RESOURCE_TYPE } from '../constants'
 import { Link, NavLink } from "react-router-dom";
+import { badgeVariants } from "@/components/ui/badge"
 
 const Sidebar = ({ handleFilterChange }) => {
   return (
@@ -14,7 +15,7 @@ const Sidebar = ({ handleFilterChange }) => {
             return (<NavLink
               key={`${type}-${RESOURCE_TYPE[type]}`}
               href="#"
-              className="text-base font-medium hover:text-gray-900 "
+              className={`text-base font-medium hover:text-gray-900 ${badgeVariants({ variant: "destructive" })}`}
               onClick={() => handleFilterChange(RESOURCE_TYPE[type])}
             >
               {type}

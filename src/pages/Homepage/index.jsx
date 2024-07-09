@@ -16,6 +16,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import ResourceFilterLinks from "@/components/ResourceFilterLinks";
 
 export default function HomePage() {
   const [filter, setFilter] = useState(RESOURCE_TYPE.All);
@@ -59,6 +60,9 @@ export default function HomePage() {
               onSubmit={handleSearchSubmit}
             />
           </div>
+
+          <ResourceFilterLinks onClick={handleResourceTypeChange} selected={filter} />
+
           <h2>{searchTerm && `Search results for "${searchTerm}"`}</h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-4">
             {response}

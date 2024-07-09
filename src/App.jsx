@@ -21,7 +21,7 @@ import UnAuthenticatedRoutes from './components/routes/UnAuthenticatedRoutes'
 const router = createBrowserRouter(
   createRoutesFromElements(
     // TODO: configure key for error boundar
-    <Route ErrorBoundary={ErrorPage}>
+    <Route errorElement={<ErrorPage />}>
       <Route exact path="/" element={<LandingPage />}></Route>
       <Route element={<ProtectedRoutes />} >
         <Route path="/home" element={<HomePage />}></Route>

@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom"
+import { Link, useRouteError } from "react-router-dom"
 
-export default function ErrorPage({ error, resetErrorBoundary }) {
+export default function ErrorPage() {
+  const error = useRouteError()
+
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-gray-100">
       <div className="max-w-md space-y-4 text-center">
         <TriangleAlertIcon className="mx-auto h-12 w-12 text-red-500" />
-        <h1 className="text-2xl font-bold text-gray-900">Oops, something went wrong!</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{error?.statusText ?? "Oops, something went wrong!"}</h1>
         <p className="text-gray-600">
-          We're sorry, but an unexpected error has occurred. Please try again later or contact support if the problem
-          persists.
+          {error ? error?.data : "We're sorry, but an unexpected error has occurred. Please try again later or contact support if the problem persists."}
         </p>
+        <p></p>
         <Link
           to={'/home'}
           className="w-full inline-flex h-10 items-center justify-center rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50"

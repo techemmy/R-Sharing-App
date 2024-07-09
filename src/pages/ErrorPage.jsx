@@ -9,7 +9,8 @@ export default function ErrorPage() {
         <TriangleAlertIcon className="mx-auto h-12 w-12 text-red-500" />
         <h1 className="text-2xl font-bold text-gray-900">{error?.statusText ?? "Oops, something went wrong!"}</h1>
         <p className="text-gray-600">
-          {error ? error?.data : "We're sorry, but an unexpected error has occurred. Please try again later or contact support if the problem persists."}
+          {console.dir(error)}
+          {error ? (error?.data || error?.message) : "We're sorry, but an unexpected error has occurred. Please try again later or contact support if the problem persists."}
         </p>
         <p></p>
         <Link

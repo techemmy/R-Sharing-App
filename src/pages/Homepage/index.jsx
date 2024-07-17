@@ -23,8 +23,8 @@ export default function HomePage() {
   const totalPages = data?.data?.totalPages;
 
   useEffect(() => {
-    if (!isNaN(totalPages) && currentPage > 1 && resources?.length === 0) {
-      setSearchParams({ page: 1 })
+    if (!isNaN(totalPages) && currentPage > 1 && currentPage > totalPages) {
+      setSearchParams({ page: totalPages === 0 ? 1 : totalPages })
     }
   }, [totalPages])
 

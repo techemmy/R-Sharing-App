@@ -41,7 +41,9 @@ export default function HomePage() {
   if (isLoading) {
     response = <LoadingResourceCards />
   } else if (resources) {
-    response = resources?.length > 0 ? <ResourceCards resources={resources} /> : <p className="font-medium mt-5">No resources found</p>;
+    response = resources?.length > 0
+      ? <ResourceCards resources={resources} />
+      : <p className="font-medium mt-5">No resources found</p>;
   } else if (error) {
     response = <p>Something went wrong {error?.response?.data?.message}</p>
   }
@@ -51,7 +53,7 @@ export default function HomePage() {
       <Header />
       <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 px-4 mb-4 md:px-6 md:mb-6">
         <div className="flex flex-col pt-4">
-          <div className="flex flex-wrap gap-2 mb-5 items-center justify-between h-max">
+          <div className="flex flex-wrap flex-col md:flex-row gap-2 mb-5 md:items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
             <SearchInput
               urlSearchTerm={searchTerm}

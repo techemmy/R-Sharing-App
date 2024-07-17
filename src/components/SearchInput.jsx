@@ -17,7 +17,7 @@ export default function SearchInput({ onSubmit, urlSearchTerm = '' }) {
 
   return (
     <form onSubmit={handleSubmit} className="flex items-center gap-2">
-      <div className="relative w-full max-w-md">
+      <div className="relative w-full">
         <Input type="text" name="q" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search..." className="pr-10" />
         <Button type="submit" variant="ghost" size="icon" className="absolute inset-y-0 right-0 rounded-full">
           <SearchIcon className="w-5 h-5" />

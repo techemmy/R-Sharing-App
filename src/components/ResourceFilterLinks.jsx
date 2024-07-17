@@ -18,7 +18,7 @@ export default function ResourceFilterLinks({ onClick, selected }) {
   })
 
   return (
-    <div className="flex flex row">
+    <div className="flex flex-row justify-between md:justify-start">
       {filterLinks}
     </div>
   )

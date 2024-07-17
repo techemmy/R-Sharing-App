@@ -1,7 +1,6 @@
-import { RESOURCE_TYPE } from '../constants'
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Sidebar = ({ handleFilterChange }) => {
+const Sidebar = () => {
   return (
     <nav className="bg-gray-50 p-4 md:p-6 flex flex-col gap-4 h-max">
       <div className="flex items-center gap-2">
@@ -10,16 +9,6 @@ const Sidebar = ({ handleFilterChange }) => {
       <div className="flex flex-col gap-2">
         <h3 className="text-sm font-medium text-gray-500 ">Filter</h3>
         <div className="flex flex-col gap-1">
-          {Object.keys(RESOURCE_TYPE).map(type => {
-            return (<NavLink
-              key={`${type}-${RESOURCE_TYPE[type]}`}
-              href="#"
-              className="text-base font-medium hover:text-gray-900 "
-              onClick={() => handleFilterChange(RESOURCE_TYPE[type])}
-            >
-              {type}
-            </NavLink>)
-          })}
         </div>
       </div>
 

@@ -5,7 +5,6 @@ import { badgeVariants } from "@/components/ui/badge";
 export default function ResourceFilterLinks({ onClick, selected }) {
 
   const filterLinks = Object.keys(RESOURCE_TYPE).map(type => {
-    console.log('selected', selected, 'type', type)
     return (<Link
       key={`${type}-${RESOURCE_TYPE[type]}`}
       href="#"

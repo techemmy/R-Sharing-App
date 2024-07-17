@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateResourceDto } from './dto/create-resource.dto';
@@ -97,7 +98,14 @@ export class ResourcesService {
     return await this.cloudinaryService
       .uploadImage({ file, folder, public_id: `${resource.id}-${pageNo}` })
       .catch((e) => {
-        throw new BadRequestException('Invalid file type. Image upload failed');
+        console.log(e);
+        if (e?.message && e?.http_code) {
+          throw new BadRequestException(e?.message);
+        }
+
+        throw new InternalServerErrorException(
+          'Internal error.\nKindly Contact support with the link at the bottom of the page.',
+        );
       });
   }
 

@@ -94,7 +94,7 @@ export default function Header({ view = HEADER_VIEWS.Home }) {
             <p className="mt-1.5 text-lg text-gray-500">Welcome, {user.username}! 🎉</p>
           </div>
 
-          <div className="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+          <div className="mt-4 flex gap-4 sm:mt-0 flex-row justify-center sm:items-center">
             {buttonsToShow}
           </div>
         </div>

@@ -24,6 +24,10 @@ export const PaginationParams = createParamDecorator(
       );
     }
 
+    if (page < 1) {
+      throw new BadRequestException('Invalid page number');
+    }
+
     const limit = size;
     const offset = (page - 1) * limit;
     return { page, limit, size, offset };

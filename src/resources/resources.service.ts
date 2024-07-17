@@ -8,7 +8,7 @@ import { CreateResourceDto } from './dto/create-resource.dto';
 import { UpdateResourceDto } from './dto/update-resource.dto';
 import { Resources, ResourcesDocument } from './schemas/resources.schema';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Query } from 'mongoose';
 import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 import { Pagination } from 'src/decorators/pagination.decorator';
 import { ResourceType } from './enums/resources.enums';
@@ -34,15 +34,13 @@ export class ResourcesService {
     resourceType?: ResourceType;
     paginationParams?: Pagination;
     q?: string;
-  }) {
+  }): Query<ResourcesDocument[] | [], ResourcesDocument> {
     const validResourceTypes = Object.values(ResourceType);
     if (resourceType && !validResourceTypes.includes(resourceType)) {
       throw new BadRequestException(
         `Invalid resource type. Use ${validResourceTypes.join(' or ')}`,
       );
     }
-
-    const { limit, offset } = paginationParams;
 
     let resourceQuery = this.resourceModel
       .find()
@@ -59,6 +57,12 @@ export class ResourcesService {
 
     if (resourceType) {
       resourceQuery = resourceQuery.where({ resourceType });
+    }
+
+    let limit: number, offset: number;
+    if (paginationParams) {
+      limit = paginationParams.limit;
+      offset = paginationParams.offset;
     }
 
     return resourceQuery.limit(limit).skip(offset).sort({ createdAt: -1 });

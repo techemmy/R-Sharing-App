@@ -70,9 +70,14 @@ export class ResourcesController {
       q,
       resourceType,
     });
-    const total = await this.resourcesService.countAll();
+    const resourcesCount = await this.resourcesService
+      .findAll({
+        q,
+        resourceType,
+      })
+      .countDocuments();
     const { page, size } = paginationParams;
-    const pages = Math.ceil(total / size);
+    const pages = Math.ceil(resourcesCount / size);
     return {
       page,
       totalPages: pages,

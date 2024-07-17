@@ -26,7 +26,11 @@ export default function HomePage() {
     if (!isNaN(totalPages) && currentPage > 1 && currentPage > totalPages) {
       setSearchParams({ page: totalPages === 0 ? 1 : totalPages })
     }
-  }, [totalPages])
+
+    if (currentPage < 0) {
+      setSearchParams({ page: 1 })
+    }
+  }, [totalPages, currentPage])
 
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
@@ -38,7 +42,9 @@ export default function HomePage() {
   }
 
   const handlePageChange = function(page) {
-    if (page < 1 || page > totalPages || page === currentPage) return
+    if (page < 1
+      || page > totalPages
+      || page === currentPage) return
     setSearchParams({ page })
   }
 

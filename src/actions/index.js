@@ -39,6 +39,12 @@ export async function createResourceAction({ request }) {
     return redirect("/home");
   } catch (error) {
     console.log("error", error);
+    alert(
+      error?.response?.data?.message ||
+        error?.message ||
+        "Something went wrong.\n\
+        Kindly Contact support with the link at the bottom of the page",
+    );
     return null;
   }
 }

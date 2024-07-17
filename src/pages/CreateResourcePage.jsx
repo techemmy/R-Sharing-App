@@ -2,6 +2,7 @@ import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import Header from "../components/Header";
 import { HEADER_VIEWS } from "../constants";
 import useAuth from "../hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 export default function CreateResourcePage() {
   const { data: { data: { data: schools } } } = useLoaderData();
@@ -131,13 +132,14 @@ export default function CreateResourcePage() {
             </div>
           </div>
           <div className="bg-gray-50 px-6 py-4 rounded-b-lg">
-            <button
+            <Button
               type="submit"
               className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${navigation.state === "submitting" ? "cursor-not-allowed" : ''}`}
               disabled={navigation.state === "submitting"}
+              isLoading={navigation.state === "submitting"}
             >
-              {navigation.state === "submitting" ? "Loading..." : "Create Resource"}
-            </button>
+              Create Resource
+            </Button>
           </div>
         </Form>
       </div>

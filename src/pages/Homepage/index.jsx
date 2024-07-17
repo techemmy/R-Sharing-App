@@ -49,9 +49,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-6 px-4 mb-4 md:px-6 md:mb-6">
-        <Sidebar handleFilterChange={handleResourceTypeChange} />
-
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 px-4 mb-4 md:px-6 md:mb-6">
         <div className="flex flex-col pt-4">
           <div className="flex flex-wrap gap-2 mb-5 items-center justify-between h-max">
             <h1 className="text-2xl font-bold">{filter || 'All'} Resources</h1>
@@ -69,7 +67,7 @@ export default function HomePage() {
           </div>
 
           {resources?.length > 0 &&
-            <Pagination className="mt-2">
+            <Pagination className="mt-8">
               <PaginationContent>
                 <PaginationItem>
                   <PaginationPrevious href="#" />
@@ -87,6 +85,8 @@ export default function HomePage() {
             </Pagination>
           }
         </div>
+
+        <Sidebar />
       </div>
     </>
   );

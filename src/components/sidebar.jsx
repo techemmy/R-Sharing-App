@@ -4,10 +4,10 @@ const Sidebar = () => {
   return (
     <nav className="bg-gray-50 p-4 md:p-6 flex flex-col gap-4 h-max">
       <div className="flex items-center gap-2">
-        <h2 className="text-lg font-semibold">Resources</h2>
+        <h2 className="text-lg font-semibold">Top Contributors</h2>
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="text-sm font-medium text-gray-500 ">Filter</h3>
+        <h3 className="text-sm font-medium text-gray-500 ">Here</h3>
         <div className="flex flex-col gap-1">
         </div>
       </div>

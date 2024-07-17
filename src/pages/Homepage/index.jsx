@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header"
 import SearchInput from "@/components/SearchInput"
 import { RESOURCE_TYPE } from "@/constants"
@@ -21,6 +21,12 @@ export default function HomePage() {
   )
   const resources = data?.data?.data;
   const totalPages = data?.data?.totalPages;
+
+  useEffect(() => {
+    if (!isNaN(totalPages) && currentPage > 1 && resources?.length === 0) {
+      setSearchParams({ page: 1 })
+    }
+  }, [totalPages])
 
   const handleResourceTypeChange = (resourceType) => {
     setFilter(resourceType)
@@ -67,12 +73,11 @@ export default function HomePage() {
             {response}
           </div>
 
-          {resources?.length > 0 &&
-            <CustomPagination
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              totalPages={totalPages}
-            />}
+          <CustomPagination
+            currentPage={currentPage}
+            handlePageChange={handlePageChange}
+            totalPages={totalPages}
+          />
         </div>
 
         <Sidebar />

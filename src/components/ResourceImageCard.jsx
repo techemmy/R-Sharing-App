@@ -1,4 +1,5 @@
 import { CarouselItem } from "@/components/ui/carousel";
+import { AspectRatio } from "./ui/aspect-ratio";
 
 async function downloadImage(imageSrc, imageName) {
   const image = await fetch(imageSrc)
@@ -20,7 +21,9 @@ export default function ResourceImageCard({
 }) {
   return (
     <CarouselItem className="relative">
-      <img src={image.url} alt={`${resourceInfo} page - ${image.pageNo}`} className="object-cover w-full h-auto rounded-lg" />
+      <AspectRatio ratio={4 / 3} className="bg-muted">
+        <img src={image.url} alt={`${resourceInfo} page - ${image.pageNo}`} className="object-cover w-full h-auto rounded-lg" />
+      </AspectRatio>
       <button
         onClick={() => {
           downloadImage(image.url, `${resourceInfo}-${image.pageNo}`)

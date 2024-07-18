@@ -15,8 +15,6 @@ import { ResourceType } from './enums/resources.enums';
 
 @Injectable()
 export class ResourcesService {
-  private IMAGES_FOLDER = 'rsharing';
-
   constructor(
     @InjectModel(Resources.name) private resourceModel: Model<Resources>,
     private cloudinaryService: CloudinaryService,
@@ -98,7 +96,7 @@ export class ResourcesService {
     resource: ResourcesDocument;
     pageNo: number;
   }) {
-    const folder = `${this.IMAGES_FOLDER}/${resource.resourceType}`;
+    const folder = `${resource.resourceType}`;
     return await this.cloudinaryService
       .uploadImage({ file, folder, public_id: `${resource.id}-${pageNo}` })
       .catch((e) => {
@@ -120,8 +118,8 @@ export class ResourcesService {
     pageNo: number;
   }) {
     const deleted = await this.cloudinaryService.deleteImage({
-      folder: this.IMAGES_FOLDER,
-      public_id: `${resource.resourceType}/${resource.id}-${pageNo}`,
+      folder: `${resource.resourceType}`,
+      public_id: `${resource.id}-${pageNo}`,
     });
 
     if (deleted.result === 'not found') {
@@ -133,8 +131,8 @@ export class ResourcesService {
   async deleteResourceImages(resource: ResourcesDocument): Promise<void> {
     for (const image of resource.images) {
       await this.cloudinaryService.deleteImage({
-        folder: this.IMAGES_FOLDER,
-        public_id: `${resource.resourceType}/${resource.id}-${image.pageNo}`,
+        folder: `${resource.resourceType}`,
+        public_id: `${resource.id}-${image.pageNo}`,
       });
     }
     return;

@@ -5,10 +5,19 @@ import { getResourceById } from "@/api/resources";
 import { useEffect, useState } from "react";
 import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import ResourceImageCard from "@/components/ResourceImageCard";
+import { useFetcher } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
 export default function ViewResourcePage() {
   const { resourceId } = useParams();
   const [resource, setResource] = useState([])
+  const fetcher = useFetcher();
+  const { user } = useAuth()
+  const resourceIsStared = resource?.stars?.includes(user._id);
+
+  useEffect(() => {
+    setResource(fetcher.data);
+  }, [fetcher])
 
   useEffect(() => {
     getResourceById(resourceId).then(resource => {
@@ -133,14 +142,14 @@ export default function ViewResourcePage() {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-between">
+              <fetcher.Form method="PATCH" className="flex items-center justify-between">
                 <button
-                  type="button"
-                  className="text-indigo-600 hover:bg-indigo-100 p-2 rounded-full"
+                  type="submit"
+                  className={`active:scale-125 transition-transform text-indigo-600 hover:bg-indigo-100 p-2 rounded-full ${resourceIsStared && "animate-pulse"}`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
+                    className={`h-6 w-6 ${resourceIsStared && "fill-indigo-600"}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -155,7 +164,7 @@ export default function ViewResourcePage() {
                   <span className="sr-only">Like</span>
                 </button>
                 <div className="text-gray-500">{resource?.stars?.length} likes</div>
-              </div>
+              </fetcher.Form>
               <div className="bg-gray-50 rounded-lg shadow-lg">
                 <div className="p-8 md:p-10">
                   <div>

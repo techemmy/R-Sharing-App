@@ -1,5 +1,6 @@
 import { redirect } from "react-router-dom";
 import api from "../api";
+import { starResourceById } from "@/api/resources";
 
 export async function createResourceAction({ request }) {
   const formData = await request.formData();
@@ -47,4 +48,8 @@ export async function createResourceAction({ request }) {
     );
     return null;
   }
+}
+
+export async function resourceAction({ params }) {
+  return await starResourceById(params.resourceId);
 }

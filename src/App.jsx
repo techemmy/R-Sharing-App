@@ -11,7 +11,7 @@ import LandingPage from "./pages/landingPage";
 import CreateResourcePage from "./pages/CreateResourcePage";
 import AuthProvider from './provider/authProvider'
 import { createResourceLoader } from "./loaders";
-import { createResourceAction } from "./actions";
+import { createResourceAction, resourceAction } from "./actions";
 import ErrorPage from './pages/ErrorPage'
 import ViewResource from "@/pages/ViewResource";
 import ProtectedRoutes from './components/routes/ProtectedRoutes'
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoutes />} >
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/create-resource" loader={createResourceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
-        <Route path='/view-resource/:resourceId' element={<ViewResource />}></Route>
+        <Route path='/view-resource/:resourceId' action={resourceAction} element={<ViewResource />}></Route>
       </Route>
       <Route element={<UnAuthenticatedRoutes />}>
         <Route path="/login" element={<Login />}></Route>

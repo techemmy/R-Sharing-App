@@ -7,6 +7,8 @@ import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/com
 import ResourceImageCard from "@/components/ResourceImageCard";
 import { useFetcher } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 export default function ViewResourcePage() {
   const { resourceId } = useParams();
@@ -16,6 +18,7 @@ export default function ViewResourcePage() {
   const resourceIsStared = resource?.stars?.includes(user._id);
   const [api, setApi] = useState()
   const [currentImgNo, setCurrentImgNo] = useState(1);
+  const { toast } = useToast();
 
   useEffect(() => {
     setResource(fetcher.data);
@@ -24,6 +27,13 @@ export default function ViewResourcePage() {
   useEffect(() => {
     getResourceById(resourceId).then(resource => {
       setResource(resource)
+    }).catch(error => {
+      toast({
+        variant: "destructive",
+        title: "Couldn't get the resource 🥲",
+        description: error?.response?.data?.message || error.message || 'Something unexpected happened',
+        action: <ToastAction onClick={() => window.location.reload()} altText="Try again">Try again</ToastAction>,
+      })
     })
   }, [resourceId])
 

@@ -9,10 +9,18 @@ const Registration = () => {
   const handleSubmit = async (userData) => {
     try {
       await auth.register(userData)
-      alert('Signup successful!')
+      toast({
+        className: "bg-green-500 text-white",
+        title: "Your account has been created!🥳🎉",
+        description: "Academic excellence now in bounds 🚀"
+      })
       return navigate('/login')
     } catch (error) {
-      alert(error?.response?.data?.message || error?.message || 'Something went wrong')
+      toast({
+        variant: "destructive",
+        title: "Signup Error 😬",
+        description: error?.response?.data?.message || error.message || 'Something unexpected happened',
+      })
     }
   };
 

@@ -2,19 +2,29 @@ import useAuth from "../../hooks/useAuth";
 import Logo from "../../components/Logo";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import { useToast } from "@/components/ui/use-toast";
 
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate()
+  const { toast } = useToast();
 
   const handleSubmit = async (userData) => {
     try {
       await login(userData)
-      alert("Login successful")
+      toast({
+        className: "bg-green-500 text-white",
+        title: "Login Successful",
+        description: "Time to level up 😁"
+      })
       navigate('/home')
     } catch (error) {
-      alert(error?.response?.data?.message || error?.message || 'Something went wrong')
+      toast({
+        variant: "destructive",
+        title: "Login Error 😬",
+        description: error?.response?.data?.message || error.message || 'Something unexpected happened',
+      })
     }
   }
 

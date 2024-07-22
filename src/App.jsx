@@ -16,6 +16,7 @@ import ErrorPage from './pages/ErrorPage'
 import ViewResource from "@/pages/ViewResource";
 import ProtectedRoutes from './components/routes/ProtectedRoutes'
 import UnAuthenticatedRoutes from './components/routes/UnAuthenticatedRoutes'
+import { Toaster } from "./components/ui/toaster";
 
 
 const router = createBrowserRouter(
@@ -40,6 +41,7 @@ const App = () => {
   return (
     <AuthProvider>
       <RouterProvider router={router} />
+      <Toaster />
     </AuthProvider>
   )
 };

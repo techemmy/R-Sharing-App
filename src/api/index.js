@@ -20,8 +20,7 @@ api.interceptors.response.use(
     }
 
     if (error?.code === "ERR_NETWORK") {
-      console.log("Something went wrong");
-      alert("Check your internet connection");
+      console.log("Network error");
     }
     return Promise.reject(error);
   },

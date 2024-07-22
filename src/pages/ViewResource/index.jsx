@@ -14,6 +14,8 @@ export default function ViewResourcePage() {
   const fetcher = useFetcher();
   const { user } = useAuth()
   const resourceIsStared = resource?.stars?.includes(user._id);
+  const [api, setApi] = useState()
+  const [currentImgNo, setCurrentImgNo] = useState(1);
 
   useEffect(() => {
     setResource(fetcher.data);
@@ -25,6 +27,17 @@ export default function ViewResourcePage() {
     })
   }, [resourceId])
 
+  useEffect(() => {
+    if (!api) {
+      return
+    }
+
+    setCurrentImgNo(api.selectedScrollSnap() + 1)
+
+    api.on("select", () => {
+      setCurrentImgNo(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
 
   const resourceImages = resource?.images?.map(image => {
     return <ResourceImageCard key={image.pageNo} image={image} resourceInfo={`${resource.courseName}-${resource.resourceType}`} />
@@ -102,7 +115,7 @@ export default function ViewResourcePage() {
                 <div className="p-8 md:p-10">
                   <div className="flex flex-wrap items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-medium">Resource Images</h3>
+                      <h3 className="text-lg font-medium">Resource Images <b>({resource?.images?.length})</b></h3>
                       <p className="text-gray-500">View the images uploaded for this resource.</p>
                     </div>
                     <button
@@ -131,13 +144,18 @@ export default function ViewResourcePage() {
                     {resource?.images?.length <= 0
                       ? "No Images"
                       :
-                      <Carousel className="w-full">
-                        <CarouselContent>
-                          {resourceImages}
-                        </CarouselContent>
-                        <CarouselPrevious />
-                        <CarouselNext />
-                      </Carousel>
+                      <>
+                        <Carousel setApi={setApi} className="w-full">
+                          <CarouselContent>
+                            {resourceImages}
+                          </CarouselContent>
+                          <CarouselPrevious />
+                          <CarouselNext />
+                        </Carousel>
+                        <div className="py-2 text-center text-sm text-muted-foreground">
+                          Slide {currentImgNo} of {resource?.images?.length}
+                        </div>
+                      </>
                     }
                   </div>
                 </div>
@@ -145,7 +163,7 @@ export default function ViewResourcePage() {
               <fetcher.Form method="PATCH" className="flex items-center justify-between">
                 <button
                   type="submit"
-                  className={`active:scale-125 transition-transform text-indigo-600 hover:bg-indigo-100 p-2 rounded-full ${resourceIsStared && "animate-pulse"}`}
+                  className={`active:scale-125 transition-transform text-indigo-600 hover:bg-indigo-100 p-2 rounded-full ${!resourceIsStared && "animate-pulse"}`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

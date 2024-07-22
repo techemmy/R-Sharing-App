@@ -17,6 +17,7 @@ import ViewResource from "@/pages/ViewResource";
 import ProtectedRoutes from './components/routes/ProtectedRoutes'
 import UnAuthenticatedRoutes from './components/routes/UnAuthenticatedRoutes'
 import { Toaster } from "./components/ui/toaster";
+import UserProfilePage from "./pages/UserProfile";
 
 
 const router = createBrowserRouter(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/create-resource" loader={createResourceLoader} action={createResourceAction} element={<CreateResourcePage />}></Route>
         <Route path='/view-resource/:resourceId' action={resourceAction} element={<ViewResource />}></Route>
+        <Route path='/profile' element={<UserProfilePage />} />
       </Route>
       <Route element={<UnAuthenticatedRoutes />}>
         <Route path="/login" element={<Login />}></Route>

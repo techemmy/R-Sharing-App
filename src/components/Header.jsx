@@ -35,7 +35,7 @@ export default function Header({ view = HEADER_VIEWS.Home }) {
         className="flex items-center gap-x-1 rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
         type="button"
       >
-        {navigation.state === "loading" ? <ButtonAndLinkLoader /> : "View Profile"}
+        {navigation.state === "loading" ? <ButtonAndLinkLoader /> : "My profile"}
         <SquareArrowOutUpRightIcon size={15} />
       </Link>
     </>

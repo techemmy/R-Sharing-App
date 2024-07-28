@@ -1,17 +1,16 @@
-import { RESOURCE_TYPE } from '@/constants';
 import { Link } from 'react-router-dom';
 import { badgeVariants } from "@/components/ui/badge";
 
-export default function ResourceFilterLinks({ onClick, selected }) {
+export default function ResourceFilterLinks({ onClick, selected, resourceFilters }) {
 
-  const filterLinks = Object.keys(RESOURCE_TYPE).map(type => {
+  const filterLinks = Object.keys(resourceFilters).map(type => {
     return (<Link
-      key={`${type}-${RESOURCE_TYPE[type]}`}
+      key={`${type}-${resourceFilters[type]}`}
       href="#"
       className={`${badgeVariants({
-        variant: `${selected === RESOURCE_TYPE[type] ? 'default' : 'secondary'}`
+        variant: `${selected === resourceFilters[type] ? 'default' : 'secondary'}`
       })} mr-2 mb-2`}
-      onClick={() => onClick(RESOURCE_TYPE[type])}
+      onClick={() => onClick(resourceFilters[type])}
     >
       {type}
     </Link>)

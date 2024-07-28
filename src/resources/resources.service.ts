@@ -28,10 +28,12 @@ export class ResourcesService {
     resourceType,
     paginationParams,
     q,
+    userId,
   }: {
     resourceType?: ResourceType;
     paginationParams?: Pagination;
     q?: string;
+    userId?: string;
   }): Query<ResourcesDocument[] | [], ResourcesDocument> {
     const validResourceTypes = Object.values(ResourceType);
     if (resourceType && !validResourceTypes.includes(resourceType)) {
@@ -61,6 +63,10 @@ export class ResourcesService {
     if (paginationParams) {
       limit = paginationParams.limit;
       offset = paginationParams.offset;
+    }
+
+    if (userId) {
+      resourceQuery.find({ creator: userId });
     }
 
     return resourceQuery.limit(limit).skip(offset).sort({ createdAt: -1 });

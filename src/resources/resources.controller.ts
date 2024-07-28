@@ -64,11 +64,13 @@ export class ResourcesController {
     @PaginationParams() paginationParams: Pagination,
     @Query('q') q: string,
     @Query('type') resourceType: ResourceType,
+    @Query('userId', IsMongooseIdPipe) userId: string,
   ) {
     const resources = await this.resourcesService.findAll({
       paginationParams,
       q,
       resourceType,
+      userId,
     });
     const resourcesCount = await this.resourcesService
       .findAll({

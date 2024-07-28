@@ -16,6 +16,7 @@ api.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       CookieHelper.deleteCookie("token");
+      location.reload();
       return;
     }
 

@@ -1,4 +1,4 @@
-export default function Card({ resource }) {
+export default function ResourceCard({ resource }) {
   return (
     <div
       key={resource._id}

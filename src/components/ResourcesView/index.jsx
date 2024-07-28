@@ -19,10 +19,10 @@ export default function ResourcesView({ view = USER_RESOURCE_VIEWS.general }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const searchTerm = searchParams.get('q') ?? '';
   const currentPage = parseInt(searchParams.get('page') || 1);
+  const { user } = useAuth();
   let userId = '';
 
-  if (view === USER_RESOURCE_VIEWS.personalUserView) {
-    const { user } = useAuth();
+  if (view === USER_RESOURCE_VIEWS.personal) {
     userId = user._id;
   }
 

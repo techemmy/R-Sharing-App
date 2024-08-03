@@ -3,109 +3,80 @@ import Header from "../components/Header";
 import { HEADER_VIEWS } from "../constants";
 import useAuth from "../hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import SelectWithLabel from "@/components/SelectWithLabel";
+import InputWithLabel from "@/components/InputWithLabel";
 
 export default function CreateResourcePage() {
-  const { data: { data: { data: schools } } } = useLoaderData();
-  const { user: { _id: creator } } = useAuth();
+  const {
+    data: {
+      data: { data: schools },
+    },
+  } = useLoaderData();
+  const schoolOptions = schools.map((school) => ({
+    name: `${school.name} ${school.acronym}`,
+    value: school._id,
+  }));
+  const {
+    user: { _id: creator },
+  } = useAuth();
   const navigation = useNavigation();
   return (
     <div className="w-full bg-indigo-50">
       <Header view={HEADER_VIEWS.CreateResource} />
       <div className="container mx-auto py-12">
-        <Form method="post" encType="multipart/form-data" className="bg-white rounded-lg shadow-lg">
-          <input value={creator} name='creator' className="hidden" readOnly />
+        <Form
+          method="post"
+          encType="multipart/form-data"
+          className="bg-white rounded-lg shadow-lg"
+        >
+          <input value={creator} name="creator" className="hidden" readOnly />
           <div className="p-8 md:p-10">
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-bold">Create New Resource</h2>
-                <p className="text-gray-500">Select the type of resource you want to create.</p>
+                <p className="text-gray-500">
+                  Select the type of resource you want to create.
+                </p>
               </div>
               <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="resource-type" className="block text-sm font-medium text-gray-700 ">
-                    Resource Type
-                  </label>
-                  <div className="mt-2">
-                    <div className="relative">
-                      <select
-                        id="resource-type"
-                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
-                        name="resourceType"
-                        required
-                      >
-                        <option value="">Select type</option>
-                        <option value="PQ">Past Question (PQ)</option>
-                        <option value="NOTE">Note</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="resource-year" className="block text-sm font-medium text-gray-700">
-                    Resource Year
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      required
-                      type="number"
-                      id="resource-year"
-                      placeholder="Enter year"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
-                      name="resourceYear"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="course-name" className="block text-sm font-medium text-gray-700 ">
-                    Course Name
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      required
-                      id="course-name"
-                      placeholder="Enter course name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
-                      name="courseName"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="course-code" className="block text-sm font-medium text-gray-700 ">
-                    Course Code
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      required
-                      id="course-code"
-                      placeholder="Enter course code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
-                      name="courseCode"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <label htmlFor="school" className="block text-sm font-medium text-gray-700 ">
-                  School
-                </label>
-                <div className="mt-2">
-                  <div className="relative">
-                    <select
-                      id="school"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
-                      name="school"
-                      required
-                    >
-                      <option>Select school</option>
-                      {schools.map(school => {
-                        return <option key={`${school._id}`} value={school._id}>{school.name} ({school.acronym})</option>
-                      })}
+                <SelectWithLabel
+                  label="Resource Type"
+                  name="resourceType"
+                  options={[
+                    { value: "PQ", name: "Past Question (PQ)" },
+                    { value: "NOTE", name: "Notes" },
+                  ]}
+                  required
+                />
 
-                    </select>
-                  </div>
-                </div>
+                <InputWithLabel
+                  label="Resource Year"
+                  name="resourceYear"
+                  placeholder="Enter year"
+                  type="number"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <InputWithLabel
+                  label="Course Name"
+                  name="courseName"
+                  placeholder="Enter course name"
+                  type="text"
+                />
+
+                <InputWithLabel
+                  label="Course Code"
+                  name="courseCode"
+                  placeholder="Enter course code"
+                  type="text"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <SelectWithLabel
+                  label="School"
+                  name="school"
+                  options={schoolOptions}
+                />
               </div>
 
               <div className="bg-gray-50 rounded-lg shadow-lg">
@@ -113,7 +84,8 @@ export default function CreateResourcePage() {
                   <div>
                     <h3 className="text-lg font-medium">Resource Image</h3>
                     <p className="text-gray-500 ">
-                      You can upload images for your resource. Supported file types are JPG, PNG, and GIF.
+                      You can upload images for your resource. Supported file
+                      types are JPG, PNG, and GIF.
                     </p>
                   </div>
                   <div className="mt-4">
@@ -128,13 +100,12 @@ export default function CreateResourcePage() {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="bg-gray-50 px-6 py-4 rounded-b-lg">
             <Button
               type="submit"
-              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${navigation.state === "submitting" ? "cursor-not-allowed" : ''}`}
+              className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${navigation.state === "submitting" ? "cursor-not-allowed" : ""}`}
               disabled={navigation.state === "submitting"}
               isLoading={navigation.state === "submitting"}
             >
@@ -144,5 +115,5 @@ export default function CreateResourcePage() {
         </Form>
       </div>
     </div>
-  )
+  );
 }

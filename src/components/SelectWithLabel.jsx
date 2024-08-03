@@ -22,7 +22,7 @@ export default function SelectWithLabel({
             value={value}
             {...props}
           >
-            <option>Select one</option>
+            <option value="">Select one</option>
             {options.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}

@@ -93,6 +93,15 @@ export class ResourcesService {
     return this.resourceModel.findByIdAndDelete(id);
   }
 
+  checkValidImages(images: Array<Express.Multer.File>) {
+    const nonImage = images.find((image: Express.Multer.File) => {
+      return !['png', 'jpeg', 'jpg'].includes(
+        image.mimetype.split('/')[1].toLowerCase(),
+      );
+    });
+    return nonImage ? false : true;
+  }
+
   async uploadResourceImage({
     file,
     resource,

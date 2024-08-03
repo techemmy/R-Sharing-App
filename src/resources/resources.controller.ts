@@ -150,6 +150,13 @@ export class ResourcesController {
     if (!images || images.length <= 0) {
       throw new BadRequestException('No images found.');
     }
+
+    if (!this.resourcesService.checkValidImages(images)) {
+      throw new BadRequestException(
+        'Only .jpg, .jpeg, .png images are allowed',
+      );
+    }
+
     const resource = await this.resourcesService.findOne(resourceId);
     if (resource == null)
       throw new NotFoundException('Resource does not exist');

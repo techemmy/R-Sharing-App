@@ -13,7 +13,7 @@ export default function CreateResourcePage() {
     },
   } = useLoaderData();
   const schoolOptions = schools.map((school) => ({
-    name: `${school.name} ${school.acronym}`,
+    name: `${school.name}, ${school.acronym}`,
     value: school._id,
   }));
   const {
@@ -54,6 +54,7 @@ export default function CreateResourcePage() {
                   name="resourceYear"
                   placeholder="Enter year"
                   type="number"
+                  required
                 />
               </div>
               <div className="grid grid-cols-2 gap-6">
@@ -62,6 +63,7 @@ export default function CreateResourcePage() {
                   name="courseName"
                   placeholder="Enter course name"
                   type="text"
+                  required
                 />
 
                 <InputWithLabel
@@ -69,6 +71,7 @@ export default function CreateResourcePage() {
                   name="courseCode"
                   placeholder="Enter course code"
                   type="text"
+                  required
                 />
               </div>
               <div className="grid grid-cols-2 gap-6">
@@ -76,6 +79,7 @@ export default function CreateResourcePage() {
                   label="School"
                   name="school"
                   options={schoolOptions}
+                  required
                 />
               </div>
 

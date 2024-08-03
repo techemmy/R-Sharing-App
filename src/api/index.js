@@ -22,6 +22,7 @@ api.interceptors.response.use(
 
     if (error?.code === "ERR_NETWORK") {
       console.log("Network error");
+      error.message = "Network error. Check your internet connection";
     }
     return Promise.reject(error);
   },

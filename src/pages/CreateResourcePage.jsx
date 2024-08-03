@@ -89,7 +89,7 @@ export default function CreateResourcePage() {
                     <h3 className="text-lg font-medium">Resource Image</h3>
                     <p className="text-gray-500 ">
                       You can upload images for your resource. Supported file
-                      types are JPG, PNG, and GIF.
+                      types are JPG, JPEG, and PNG.
                     </p>
                   </div>
                   <div className="mt-4">

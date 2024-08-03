@@ -1,10 +1,16 @@
 import { redirect } from "react-router-dom";
 import api from "../api";
 import { starResourceById } from "@/api/resources";
+import checkValidImages from "@/utils";
 
 export async function createResourceAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData.entries());
+
+  if (!checkValidImages(formData.getAll("images"))) {
+    alert("Invalid image types. Only .jpg, .jpeg, .png images are allowed");
+    return null;
+  }
 
   try {
     const createResourceReq = await api.post("/resources", data);

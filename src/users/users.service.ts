@@ -1,15 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema';
 import { BadRequestException } from '@nestjs/common';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 // TODO: move error handling to the controllers
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private cloudinaryService: CloudinaryService,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const { username, email } = createUserDto;
@@ -57,5 +61,26 @@ export class UsersService {
 
   removeUser(id: string) {
     return this.userModel.findByIdAndDelete(id);
+  }
+
+  updateProfileImage({
+    file,
+    userId,
+  }: {
+    file: Express.Multer.File;
+    userId: string;
+  }) {
+    const folder = 'user-profile-pics';
+    this.cloudinaryService
+      .uploadImage({ file, folder, public_id: userId })
+      .catch((e) => {
+        if (e?.message && e?.http_code) {
+          throw new BadRequestException(e?.message);
+        }
+
+        throw new InternalServerErrorException(
+          'Internal error.\nKindly Contact support with the link at the bottom of the page.',
+        );
+      });
   }
 }

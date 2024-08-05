@@ -63,6 +63,7 @@ export class UsersController {
     @Param('userId') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
+    console.log('here', updateUserDto);
     const user = await this.usersService.findById(id).select('-password');
     if (!user) {
       throw new BadRequestException('User does not exist');

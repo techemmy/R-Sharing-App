@@ -2,11 +2,15 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { School } from 'src/school/schemas/school.schema';
+import { AfricanCountriesAndTerritories } from '../enums/country.enum';
 
 @Schema({ timestamps: true })
 export class User {
   @Prop({ required: true, unique: true })
   username: string;
+
+  @Prop()
+  fullname: string;
 
   @Prop({ required: true, unique: true })
   email: string;
@@ -20,6 +24,14 @@ export class User {
 
   @Prop({ required: true })
   password: string;
+
+  @Prop({
+    enum: AfricanCountriesAndTerritories,
+  })
+  country: string;
+
+  @Prop()
+  profilePictureURL: string;
 }
 
 export type UserDocument = HydratedDocument<User>;

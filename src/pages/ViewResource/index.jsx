@@ -1,57 +1,81 @@
-import { useParams } from "react-router"
+import { useParams } from "react-router";
 import Header from "@/components/Header";
 import { HEADER_VIEWS } from "@/constants";
 import { getResourceById } from "@/api/resources";
 import { useEffect, useState } from "react";
-import { Carousel, CarouselContent, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 import ResourceImageCard from "@/components/ResourceImageCard";
 import { useFetcher } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
+import { Button } from "@/components/ui/button";
 
 export default function ViewResourcePage() {
   const { resourceId } = useParams();
-  const [resource, setResource] = useState([])
+  const [resource, setResource] = useState([]);
   const fetcher = useFetcher();
-  const { user } = useAuth()
+  const { user } = useAuth();
   const resourceIsStared = resource?.stars?.includes(user._id);
-  const [api, setApi] = useState()
+  const [api, setApi] = useState();
   const [currentImgNo, setCurrentImgNo] = useState(1);
   const { toast } = useToast();
 
   useEffect(() => {
     setResource(fetcher.data);
-  }, [fetcher])
+  }, [fetcher]);
 
   useEffect(() => {
-    getResourceById(resourceId).then(resource => {
-      setResource(resource)
-    }).catch(error => {
-      toast({
-        variant: "destructive",
-        title: "Couldn't get the resource 🥲",
-        description: error?.response?.data?.message || error.message || 'Something unexpected happened',
-        action: <ToastAction onClick={() => window.location.reload()} altText="Try again">Try again</ToastAction>,
+    getResourceById(resourceId)
+      .then((resource) => {
+        setResource(resource);
       })
-    })
-  }, [resourceId])
+      .catch((error) => {
+        toast({
+          variant: "destructive",
+          title: "Couldn't get the resource 🥲",
+          description:
+            error?.response?.data?.message ||
+            error.message ||
+            "Something unexpected happened",
+          action: (
+            <ToastAction
+              onClick={() => window.location.reload()}
+              altText="Try again"
+            >
+              Try again
+            </ToastAction>
+          ),
+        });
+      });
+  }, [resourceId]);
 
   useEffect(() => {
     if (!api) {
-      return
+      return;
     }
 
-    setCurrentImgNo(api.selectedScrollSnap() + 1)
+    setCurrentImgNo(api.selectedScrollSnap() + 1);
 
     api.on("select", () => {
-      setCurrentImgNo(api.selectedScrollSnap() + 1)
-    })
-  }, [api])
+      setCurrentImgNo(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
-  const resourceImages = resource?.images?.map(image => {
-    return <ResourceImageCard key={image.pageNo} image={image} resourceInfo={`${resource.courseName}-${resource.resourceType}`} />
-  })
+  const resourceImages = resource?.images?.map((image) => {
+    return (
+      <ResourceImageCard
+        key={image.pageNo}
+        image={image}
+        resourceInfo={`${resource.courseName}-${resource.resourceType}`}
+      />
+    );
+  });
 
   return (
     <div className="w-full bg-indigo-50">
@@ -62,11 +86,16 @@ export default function ViewResourcePage() {
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-bold">{resource?.courseName}</h2>
-                <p className="text-gray-500">{resource?.resourceType}. {resource?.resourceYear}.</p>
+                <p className="text-gray-500">
+                  {resource?.resourceType}. {resource?.resourceYear}.
+                </p>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="resource-type" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="resource-type"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Resource Type
                   </label>
                   <div className="mt-2">
@@ -79,7 +108,10 @@ export default function ViewResourcePage() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="resource-year" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="resource-year"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Resource Year
                   </label>
                   <div className="mt-2">
@@ -91,7 +123,10 @@ export default function ViewResourcePage() {
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="resource-name" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="resource-name"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     resource Name
                   </label>
                   <div className="mt-2">
@@ -101,7 +136,10 @@ export default function ViewResourcePage() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="resource-code" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="resource-code"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     resource Code
                   </label>
                   <div className="mt-2">
@@ -112,7 +150,10 @@ export default function ViewResourcePage() {
                 </div>
               </div>
               <div>
-                <label htmlFor="school" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="school"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   School
                 </label>
                 <div className="mt-2">
@@ -125,10 +166,14 @@ export default function ViewResourcePage() {
                 <div className="p-8 md:p-10">
                   <div className="flex flex-wrap items-center justify-between">
                     <div>
-                      <h3 className="text-lg font-medium">Resource Images <b>({resource?.images?.length})</b></h3>
-                      <p className="text-gray-500">View the images uploaded for this resource.</p>
+                      <h3 className="text-lg font-medium">
+                        Resource Images <b>({resource?.images?.length})</b>
+                      </h3>
+                      <p className="text-gray-500">
+                        View the images uploaded for this resource.
+                      </p>
                     </div>
-                    <button
+                    <Button
                       type="button"
                       className="inline-flex items-center mt-2 md:mt-0 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-not-allowed"
                       disabled
@@ -148,17 +193,15 @@ export default function ViewResourcePage() {
                         />
                       </svg>
                       Download as PDF (Coming Soon)
-                    </button>
+                    </Button>
                   </div>
                   <div className="mt-4">
-                    {resource?.images?.length <= 0
-                      ? "No Images"
-                      :
+                    {resource?.images?.length <= 0 ? (
+                      "No Images"
+                    ) : (
                       <>
                         <Carousel setApi={setApi} className="w-full">
-                          <CarouselContent>
-                            {resourceImages}
-                          </CarouselContent>
+                          <CarouselContent>{resourceImages}</CarouselContent>
                           <CarouselPrevious />
                           <CarouselNext />
                         </Carousel>
@@ -166,14 +209,17 @@ export default function ViewResourcePage() {
                           Slide {currentImgNo} of {resource?.images?.length}
                         </div>
                       </>
-                    }
+                    )}
                   </div>
                 </div>
               </div>
-              <fetcher.Form method="PATCH" className="flex items-center justify-between">
-                <button
+              <fetcher.Form
+                method="PATCH"
+                className="flex items-center justify-between"
+              >
+                <Button
                   type="submit"
-                  className={`active:scale-125 transition-transform text-indigo-600 hover:bg-indigo-100 p-2 rounded-full ${!resourceIsStared && "animate-pulse"}`}
+                  className={`bg-transparent active:scale-125 transition-transform text-indigo-600 hover:bg-indigo-100 p-2 rounded-full ${!resourceIsStared && "animate-pulse"}`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -190,25 +236,31 @@ export default function ViewResourcePage() {
                     />
                   </svg>
                   <span className="sr-only">Like</span>
-                </button>
-                <div className="text-gray-500">{resource?.stars?.length} likes</div>
+                </Button>
+                <div className="text-gray-500">
+                  {resource?.stars?.length} likes
+                </div>
               </fetcher.Form>
               <div className="bg-gray-50 rounded-lg shadow-lg">
                 <div className="p-8 md:p-10">
                   <div>
                     <h3 className="text-lg font-medium">Comments</h3>
-                    <p className="text-gray-500">Share your thoughts on this resource.</p>
+                    <p className="text-gray-500">
+                      Share your thoughts on this resource.
+                    </p>
                   </div>
                   <div className="mt-4">
                     <textarea
                       placeholder="Coming soon..."
                       className="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 px-3"
                     />
-                    <button
+                    <Button
                       type="submit"
                       className="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-not-allowed"
                       disabled
-                    >Coming soon</button>
+                    >
+                      Coming soon
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -217,5 +269,5 @@ export default function ViewResourcePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

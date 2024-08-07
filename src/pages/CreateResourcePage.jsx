@@ -7,11 +7,7 @@ import SelectWithLabel from "@/components/SelectWithLabel";
 import InputWithLabel from "@/components/InputWithLabel";
 
 export default function CreateResourcePage() {
-  const {
-    data: {
-      data: { data: schools },
-    },
-  } = useLoaderData();
+  const { schools } = useLoaderData();
   const schoolOptions = schools.map((school) => ({
     name: `${school.name}, ${school.acronym}`,
     value: school._id,

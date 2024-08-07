@@ -1,12 +1,5 @@
 import { Transform } from 'class-transformer';
-import {
-  IsEmail,
-  IsMongoId,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class CreateUserDto {
   @MinLength(5)
@@ -19,11 +12,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @Transform(({ value }) => value.trim().toLowerCase())
   email: string;
-
-  @IsString()
-  @IsMongoId()
-  @IsOptional()
-  school?: string;
 
   @IsNotEmpty()
   password: string;

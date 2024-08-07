@@ -15,11 +15,15 @@ import { UsersService } from './users.service';
 import { IsMongooseIdPipe } from 'src/pipes/mongoose-id.pipe';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guard';
+import { SchoolService } from 'src/school/school.service';
 
 @UseGuards(AuthGuard)
 @Controller({ version: '1', path: 'users' })
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly schoolsService: SchoolService,
+  ) {}
 
   @Get()
   async getAllUsers() {
@@ -63,13 +67,18 @@ export class UsersController {
     @Param('userId') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    console.log('here', updateUserDto);
     const user = await this.usersService.findById(id).select('-password');
     if (!user) {
       throw new BadRequestException('User does not exist');
     }
-    if (user.username === updateUserDto.username) {
-      return { data: user, message: 'It is your current username' };
+
+    const school = await this.schoolsService.findById(updateUserDto.school);
+    if (!school) {
+      throw new BadRequestException('School does not exist');
+    }
+
+    if (updateUserDto.username === user.username) {
+      delete updateUserDto.username;
     }
 
     const updatedUser = await this.usersService.updateUser(id, updateUserDto);

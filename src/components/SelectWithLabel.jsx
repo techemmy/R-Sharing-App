@@ -3,10 +3,11 @@ export default function SelectWithLabel({
   label,
   value,
   options,
+  error,
   ...props
 }) {
   return (
-    <div>
+    <div className="relative">
       <label
         htmlFor={name}
         className="block text-sm font-medium text-gray-700 "
@@ -31,6 +32,8 @@ export default function SelectWithLabel({
           </select>
         </div>
       </div>
+
+      <p className="absolute top-0 right-0 text-red-500 text-sm">{error}</p>
     </div>
   );
 }

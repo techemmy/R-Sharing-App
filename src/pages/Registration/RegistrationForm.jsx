@@ -1,30 +1,37 @@
 import { Field, Form, Formik, ErrorMessage } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import { Button } from "@/components/ui/button";
 
 const registerValidationSchema = Yup.object({
-  username: Yup.string().trim()
-    .required('Required').min(5, "Must be 5 characters or more"),
-  email: Yup.string().trim()
-    .required('Required').email('Enter a valid email'),
-  password: Yup.string().required('Required')
-})
+  username: Yup.string()
+    .trim()
+    .lowercase()
+    .required("Required")
+    .min(5, "Must be 5 characters or more"),
+  email: Yup.string().trim().required("Required").email("Enter a valid email"),
+  password: Yup.string().required("Required"),
+});
 
 export default function RegistrationForm({ handleSubmit }) {
   return (
     <Formik
-      initialValues={{ username: '', email: '', password: '' }}
+      initialValues={{ username: "", email: "", password: "" }}
       validationSchema={registerValidationSchema}
       onSubmit={(values, { setSubmitting }) => {
         handleSubmit(values).then(() => {
-          setSubmitting(false)
-        })
+          setSubmitting(false);
+        });
       }}
     >
       {(formik) => (
         <Form className="space-y-4">
           <div className="relative">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
             <ErrorMessage
               className="absolute top-0 right-0 text-red-500 text-sm"
               name="username"
@@ -40,7 +47,12 @@ export default function RegistrationForm({ handleSubmit }) {
           </div>
 
           <div className="relative">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
             <ErrorMessage
               className="absolute top-0 right-0 text-red-500 text-sm"
               name="email"
@@ -56,7 +68,12 @@ export default function RegistrationForm({ handleSubmit }) {
           </div>
 
           <div className="relative">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
             <ErrorMessage
               className="absolute top-0 right-0 text-red-500 text-sm"
               name="password"
@@ -75,13 +92,12 @@ export default function RegistrationForm({ handleSubmit }) {
             type="submit"
             disabled={!formik.isValid}
             isLoading={formik.isSubmitting}
-            className={`w-full rounded-md bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer ${!formik.isValid && 'cursor-not-allowed'}`}
+            className={`w-full rounded-md bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer ${!formik.isValid && "cursor-not-allowed"}`}
           >
             Register
           </Button>
         </Form>
       )}
-
     </Formik>
-  )
+  );
 }

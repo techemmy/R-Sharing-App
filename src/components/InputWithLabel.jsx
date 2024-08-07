@@ -1,6 +1,12 @@
-export default function InputWithLabel({ name, label, placeholder, ...props }) {
+export default function InputWithLabel({
+  name,
+  label,
+  placeholder,
+  error,
+  ...props
+}) {
   return (
-    <div>
+    <div className="relative">
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {label}
       </label>
@@ -13,6 +19,7 @@ export default function InputWithLabel({ name, label, placeholder, ...props }) {
           {...props}
         />
       </div>
+      <p className="absolute top-0 right-0 text-red-500 text-sm">{error}</p>
     </div>
   );
 }

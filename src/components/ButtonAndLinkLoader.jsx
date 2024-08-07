@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 import { Loader } from "lucide-react";
 
-export default function ButtonAndLinkLoader() {
+export default function ButtonAndLinkLoader({ text }) {
   const loader = (
-    <div className='flex'>
+    <div className="flex">
       <Loader className="mr-2 h-4 w-4 animate-spin" />
-      Please wait
+      {text || "Please wait"}
     </div>
-  )
-  return loader
+  );
+  return loader;
 }
-

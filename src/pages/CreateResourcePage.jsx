@@ -1,6 +1,5 @@
 import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import Header from "../components/Header";
-import { HEADER_VIEWS } from "../constants";
 import useAuth from "../hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import SelectWithLabel from "@/components/SelectWithLabel";
@@ -18,7 +17,7 @@ export default function CreateResourcePage() {
   const navigation = useNavigation();
   return (
     <div className="w-full bg-indigo-50">
-      <Header view={HEADER_VIEWS.CreateResource} />
+      <Header />
       <div className="container mx-auto py-12">
         <Form
           method="post"

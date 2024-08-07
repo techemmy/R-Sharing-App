@@ -1,6 +1,5 @@
 import { useParams } from "react-router";
 import Header from "@/components/Header";
-import { HEADER_VIEWS } from "@/constants";
 import { getResourceById } from "@/api/resources";
 import { useEffect, useState } from "react";
 import {
@@ -79,7 +78,7 @@ export default function ViewResourcePage() {
 
   return (
     <div className="w-full bg-indigo-50">
-      <Header view={HEADER_VIEWS.CreateResource} />
+      <Header />
       <div className="container mx-auto py-12">
         <div className="bg-white rounded-lg shadow-lg">
           <div className="p-8 md:p-10">

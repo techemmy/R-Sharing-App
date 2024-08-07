@@ -20,8 +20,3 @@ export const USER_RESOURCE_VIEWS = {
   general: "general",
   personal: "personal",
 };
-
-export const HEADER_VIEWS = {
-  Home: "home",
-  CreateResource: "create-resource",
-};

@@ -1,7 +1,6 @@
 import { PartialType, OmitType } from '@nestjs/mapped-types';
 import { Transform } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { AfricanCountriesAndTerritories } from '../enums/country.enum';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { CreateUserDto } from './create-user.dto';
 
 export class UpdateUserDto extends PartialType(
@@ -16,9 +15,9 @@ export class UpdateUserDto extends PartialType(
   @IsOptional()
   school?: string;
 
-  @IsEnum(AfricanCountriesAndTerritories)
-  @IsNotEmpty()
-  country: string;
+  // @IsEnum(AfricanCountriesAndTerritories)
+  // @IsNotEmpty()
+  // country: string;
 
   @IsString()
   @IsNotEmpty()

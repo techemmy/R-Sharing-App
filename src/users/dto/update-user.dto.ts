@@ -20,6 +20,6 @@ export class UpdateUserDto extends PartialType(
   // country: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   department: string;
 }

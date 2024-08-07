@@ -19,4 +19,8 @@ export class UpdateUserDto extends PartialType(
   @IsEnum(AfricanCountriesAndTerritories)
   @IsNotEmpty()
   country: string;
+
+  @IsString()
+  @IsNotEmpty()
+  department: string;
 }

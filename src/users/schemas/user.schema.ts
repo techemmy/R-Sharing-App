@@ -31,6 +31,9 @@ export class User {
   country: string;
 
   @Prop()
+  department: string;
+
+  @Prop()
   profilePictureURL: string;
 }
 

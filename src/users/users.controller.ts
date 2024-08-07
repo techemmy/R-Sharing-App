@@ -1,7 +1,6 @@
 import {
   BadRequestException,
   Body,
-  Req,
   Controller,
   Delete,
   Get,
@@ -16,6 +15,7 @@ import { IsMongooseIdPipe } from 'src/pipes/mongoose-id.pipe';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/guard';
 import { SchoolService } from 'src/school/school.service';
+import { JwtService } from '@nestjs/jwt';
 
 @UseGuards(AuthGuard)
 @Controller({ version: '1', path: 'users' })
@@ -23,6 +23,7 @@ export class UsersController {
   constructor(
     private readonly usersService: UsersService,
     private readonly schoolsService: SchoolService,
+    private readonly jwtService: JwtService,
   ) {}
 
   @Get()
@@ -82,7 +83,12 @@ export class UsersController {
     }
 
     const updatedUser = await this.usersService.updateUser(id, updateUserDto);
-    return { data: updatedUser, message: 'User updated succesfully' };
+    const updated_token = await this.jwtService.signAsync(updatedUser.toJSON());
+
+    return {
+      updated_token,
+      message: 'User updated succesfully',
+    };
   }
 
   @HttpCode(204)

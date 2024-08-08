@@ -84,7 +84,10 @@ export default function EditProfileForm({ user, updateToken, schools }) {
           placeholder="Enter your full name"
           type="text"
           readOnly={!editProfileOn}
-          error={formik.touched.fullname && formik.errors.fullname}
+          error={
+            editProfileOn && formik.touched.fullname && formik.errors.fullname
+          }
+          required
           {...formik.getFieldProps("fullname")}
         />
         <InputWithLabel
@@ -93,7 +96,10 @@ export default function EditProfileForm({ user, updateToken, schools }) {
           placeholder="Enter your username"
           type="text"
           readOnly={!editProfileOn}
-          error={formik.touched.username && formik.errors.username}
+          error={
+            editProfileOn && formik.touched.username && formik.errors.username
+          }
+          required
           {...formik.getFieldProps("username")}
         />
         <SelectWithLabel
@@ -103,6 +109,8 @@ export default function EditProfileForm({ user, updateToken, schools }) {
             value: school._id,
             name: `${school.name}, ${school.acronym}`,
           }))}
+          error={editProfileOn && formik.touched.school && formik.errors.school}
+          required
           disabled={!editProfileOn}
           {...formik.getFieldProps("school")}
         />
@@ -112,6 +120,11 @@ export default function EditProfileForm({ user, updateToken, schools }) {
           label="Department/Major/Field of Study"
           placeholder="Enter your department"
           type="text"
+          error={
+            editProfileOn &&
+            formik.touched.department &&
+            formik.errors.department
+          }
           readOnly={!editProfileOn}
           {...formik.getFieldProps("department")}
         />
@@ -122,6 +135,9 @@ export default function EditProfileForm({ user, updateToken, schools }) {
           options={[{ value: "Nigeria", name: "Nigeria" }]}
           type="text"
           {...formik.getFieldProps("country")}
+          error={
+            editProfileOn && formik.touched.country && formik.errors.country
+          }
           required
           disabled
         />
